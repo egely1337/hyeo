@@ -1,6 +1,6 @@
 # hyeo-i386
-  hyeo OS is an Operating System written in Assembly and C
-  It supports x86 and x64 architectures
+  hyeo OS is an Operating System written in Assembly and C++
+  It supports only i386 architecture.
   
 # Features
   1. Bootloader
