@@ -1,13 +1,23 @@
 nasm bootloader/bootloader.asm -f bin -o bootloader.bin
-nasm kernel/kernel.asm -f elf64 -o init.o
-wsl $WSLENV/x86_64-elf-gcc -ffreestanding -mno-red-zone -m64 -c "./kernel/kmain.cpp" -o "kernel.o"
-wsl $WSLENV/x86_64-elf-ld -o kernel.tmp -Ttext 0x7e00  init.o kernel.o
-wsl /usr/bin/objcopy -O binary kernel.tmp kernel.bin
-copy /b bootloader.bin+kernel.bin armenianOS-x86_64.flp
-move armenianOS-x86_64.flp ./build/x86_64/
-del kernel.bin
+nasm kernel/kernel.asm -f elf32 -o init.o
+nasm kernel/idt/interrupts.asm -f elf32 -o isr.o
+nasm kernel/vs.asm -f elf32 -o vs.o
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/kmain.cpp" -o "kernel.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/inc/io.cpp" -o "io.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/inc/tty.cpp" -o "tty.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/idt.cpp" -o "idtc.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/isr.cpp" -o "isrc.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-ld --oformat binary -Ttext 0x8000 "init.o" "idtc.o" "isr.o" "io.o" "tty.o"  "isrc.o" "kernel.o"  -o "kernel.bin"
+copy /b bootloader.bin+kernel.bin+program.bin hyeo-i386.flp
+move hyeo-i386.flp ./build/x86_64/
 del bootloader.bin
-del kernel.o 
+del kernel.bin
+del vs.o
+del kernel.o
 del init.o 
-del kernel.tmp
-qemu-system-x86_64.exe build/x86_64/armenianOS-x86_64.flp
+del isr.o
+del isrc.o 
+del idtc.o 
+del io.o 
+del tty.o 
+qemu-system-i386.exe build/x86_64/hyeo-i386.flp -m 512M

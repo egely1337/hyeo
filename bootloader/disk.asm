@@ -1,10 +1,10 @@
-PROGRAM_SPACE equ 0x7e00 
+PROGRAM_SPACE equ 0x8000 
 
 boot:
     mov ah, 0x02
     mov dl, [BOOT_DISK]
     mov bx, PROGRAM_SPACE
-    mov al, 32
+    mov al, 64
     mov ch, 0x00
     mov dh, 0x00
     mov cl, 0x02

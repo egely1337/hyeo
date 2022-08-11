@@ -24,6 +24,7 @@ gdt_descriptor:
         dw gdt_end - gdt_nulldesc - 1
         dd gdt_nulldesc
 
+global codeseg
 codeseg equ gdt_codedesc - gdt_nulldesc
 dataseg equ gdt_datasec - gdt_nulldesc
 
