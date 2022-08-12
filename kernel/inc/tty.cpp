@@ -68,12 +68,17 @@ void _printf(const char* fmt, ...){
                 SetCursorPosition(cursorPosition.returnRawPosition());
                 data++;
                 break;
+            case '\t':
+                cursorPosition.x += 4;
+                SetCursorPosition(cursorPosition.returnRawPosition());
+                data++;
+                break;
             case '%':
                 switch (*(data + 1))
                 {
                     case 'd':
                         ignored = data +1;
-                        printInteger(*argp);
+                        printf(_ttyPrintInteger(*argp));
                         argp++;
                         break;
                     case 's': {
@@ -93,15 +98,33 @@ void _printf(const char* fmt, ...){
                         break;
                 }
             default:
-                if(ignored != data && ((*data != '%' && *(data + 1) != 'd') || (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')) )
+                if(ignored != data && ((*data != '%' && *(data + 1) != 'd')|| (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')))   
                     print_char(*data);
                 data++;  
                 break;
         }
     }
 }
+char* _ttyPrintInteger(int _integer){
+    int i;
+    char* txt; 
+    i = 0;
+    do{
+        txt[i++] = _integer % 10 + '0';
+    } while((_integer /= 10) > 0);
+    txt[i] = '\0';
 
+    int lenght = (strlen(txt)-1);
+    uint32_t a, b;
+    uint8_t temp;
+    for(a = 0,b = lenght; a < b; a++, b--){
+        temp = txt[a];
+        txt[a] = txt[b];
+        txt[b] = temp;
+    }
 
+    return txt;
+}
 void printInteger(int _data){  
         int rem;
         int ones;

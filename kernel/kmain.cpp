@@ -23,6 +23,17 @@ extern "C" int _kmain(){
     );
     */
 
+   /*
+   experimental 3
+   _printf(
+    "hi guys we are gonna do something you now\nOh looks like you are gay\neax: %d\tesi: %d",
+    100,100
+   );
+   */
+    
+    /*
+    kernel panic experimental testing
     int b = (5/0);
+    */
     return -123;
 }

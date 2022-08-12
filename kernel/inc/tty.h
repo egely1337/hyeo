@@ -22,5 +22,6 @@ void clear_screen(void);
 void print_char(char s);
 void printf(const char* _text);
 void printInteger(int _data);
+char* _ttyPrintInteger(int _integer);
 void resetCursorPosition(void);
 void _printf(const char* fmt, ...); //Unsecure function
