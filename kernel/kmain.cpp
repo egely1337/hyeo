@@ -5,8 +5,24 @@
 extern "C" int _kmain(){
     isr_install();
     clear_screen();
-    for(uint32_t i = 0; i < 90000; i++){
+    /*
+    experimental
+    for(uint32_t i = 0; i < (VGA_WIDTH * MAX_ROWS); i++){
+        print_char('H');
     }
-    int i = (5 / 0);
+    memset((void*)0xB8000,'H',VGA_WIDTH * 2);
+    memcut((void*)0xB8000, (void*)(0xb8000 + (VGA_WIDTH * 2)), (VGA_WIDTH * MAX_ROWS *  - (80 * 2)));
+    resetCursorPosition();
+    */
+
+   /*
+   experimental 2
+    _printf(
+        "Lipendisin annesine gotten giriyoruzzz: %d\nBugun ne yapiyoruz ananizin amini sikiyoruz %s"
+        , 10 , "nerden? gotten!"
+    );
+    */
+
+    int b = (5/0);
     return -123;
 }

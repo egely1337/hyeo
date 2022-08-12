@@ -1,5 +1,5 @@
 #include "tty.h"
-
+#include "../mem/memory.h"
 
 void SetCursorPosition(uint16_t position){
     outb(0x3D4,0x0F);
@@ -12,14 +12,20 @@ uint16_t poscords(uint16_t x, uint16_t y){
     return y * VGA_WIDTH + x;
 }
 
-void clear_screen(){
+void clear_screen(void){
     uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
     uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
     for(int i = 0; i < maxSize; i++){
         *(VGA_MEM + i * 2) = 0; 
-        *(VGA_MEM + i * 2) = 0; 
     }
-    SetCursorPosition(0);
+    cursorPosition.x = 0;
+    cursorPosition.y = 0;
+    SetCursorPosition(cursorPosition.returnRawPosition());
+}
+
+void resetCursorPosition(void){
+    cursorPosition.x = 0;
+    cursorPosition.y = 0;
 }
 
 void print_char(char s)
@@ -31,17 +37,71 @@ void print_char(char s)
 void printf(const char* _text){
     uint8_t* data = (uint8_t*)_text; 
     while(*data != 0){
-        if(*data == '\n'){
-            cursorPosition.x = 0;
-            cursorPosition.y++;
-            SetCursorPosition(cursorPosition.returnRawPosition());
-            break;
-        } else{
-            print_char(*data);
-            data++;  
+        switch (*data)
+        {
+            case '\n':
+                cursorPosition.x = 0;
+                cursorPosition.y++;
+                SetCursorPosition(cursorPosition.returnRawPosition());
+                data++;
+                break;
+            default:
+                print_char(*data);
+                data++;  
+                break;
         }
     }
 }
+
+
+void _printf(const char* fmt, ...){
+    int* argp = (int*)&fmt;
+    argp += sizeof(fmt) / sizeof(int);
+    uint8_t* ignored;
+    uint8_t* data = (uint8_t*)fmt;
+    while(*data != 0){
+         switch (*data)
+        {
+            case '\n':
+                cursorPosition.x = 0;
+                cursorPosition.y++;
+                SetCursorPosition(cursorPosition.returnRawPosition());
+                data++;
+                break;
+            case '%':
+                switch (*(data + 1))
+                {
+                    case 'd':
+                        ignored = data +1;
+                        printInteger(*argp);
+                        argp++;
+                        break;
+                    case 's': {
+                        ignored = data+1;
+                        printf(*(char**)argp);
+                        argp++;
+                        break;
+                    }
+                    case 'c': {
+                        ignored = data+1;
+                        print_char(*(char*)argp);
+                        argp++;
+                        break;
+                    }
+                    default:
+                        print_char('%');
+                        break;
+                }
+            default:
+                if(ignored != data && ((*data != '%' && *(data + 1) != 'd') || (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')) )
+                    print_char(*data);
+                data++;  
+                break;
+        }
+    }
+}
+
+
 void printInteger(int _data){  
         int rem;
         int ones;

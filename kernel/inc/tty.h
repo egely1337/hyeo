@@ -18,8 +18,9 @@ struct
 
 
 void SetCursorPosition(uint16_t position);
-void clear_screen();
+void clear_screen(void);
 void print_char(char s);
 void printf(const char* _text);
 void printInteger(int _data);
-
+void resetCursorPosition(void);
+void _printf(const char* fmt, ...); //Unsecure function
