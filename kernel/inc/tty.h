@@ -4,6 +4,7 @@
 
 #define VGA_MEMORY (char*)0xB8000
 #define VGA_WIDTH 80
+#define MAX_ROWS 25
 
 
 struct 

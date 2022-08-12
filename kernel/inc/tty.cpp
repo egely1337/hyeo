@@ -13,25 +13,28 @@ uint16_t poscords(uint16_t x, uint16_t y){
 }
 
 void clear_screen(){
-    for(int i = (int)VGA_MEMORY; VGA_MEMORY; i++){
-        *((char*)i) = 0;
+    uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
+    uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
+    for(int i = 0; i < maxSize; i++){
+        *(VGA_MEM + i * 2) = 0; 
+        *(VGA_MEM + i * 2) = 0; 
     }
+    SetCursorPosition(0);
 }
 
 void print_char(char s)
 {
     *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
+    cursorPosition.x++; 
     SetCursorPosition(cursorPosition.returnRawPosition());
-    cursorPosition.x++;
 }
-
 void printf(const char* _text){
     uint8_t* data = (uint8_t*)_text; 
     while(*data != 0){
         if(*data == '\n'){
             cursorPosition.x = 0;
             cursorPosition.y++;
-            SetCursorPosition(cursorPosition.returnRawPosition()+1);
+            SetCursorPosition(cursorPosition.returnRawPosition());
             break;
         } else{
             print_char(*data);
@@ -39,7 +42,6 @@ void printf(const char* _text){
         }
     }
 }
-
 void printInteger(int _data){  
         int rem;
         int ones;
