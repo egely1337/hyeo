@@ -1,6 +1,8 @@
 #pragma once
 #include "idt.h"
 #include "../inc/tty.h"
+#define cli() asm("cli")
+#define sti() asm("sti")
 
 extern "C" void isr0();
 extern "C" void isr1();

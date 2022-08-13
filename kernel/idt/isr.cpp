@@ -105,14 +105,10 @@ char *exception_messages[] = {
 extern "C" void isr_handler(Registers r) {
     clear_screen();
     wait_ticks(10);
-    printf("KERNEL PANIC!!!!\n");
-    printf("CPU MESSAGE: ["); printf(exception_messages[r.int_no]);printf("]\n");
-    printf("EAX: "); printInteger(r.eax); 
-    printf("    ESI: "); printInteger(r.esi);
-    printf("\n");printf("EDI: "); printInteger(r.edi);
-    printf("    EBP: "); printInteger(r.ebp);
-    printf("\n");printf("EDX: "); printInteger(r.edx);  
-    printf("    ESP: "); printInteger(r.esp);
+    _printf(
+        "-------KERNEL PANIC!-------\nCPU MESSAGE [%s]\nEDI: %d\t\tESP: %d\nEBP: %d\t\t EAX: %d\n",
+        exception_messages[r.int_no], r.edi, r.esp,r.ebp,r.eax
+    );
     asm("hlt");
 }
 
