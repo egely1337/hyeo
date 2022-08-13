@@ -13,6 +13,10 @@ char input[128];
 
 void keyboard_handler(Registers _regs){
     uint8_t scan_code = inb(0x60);
+    if(scan_code == 0x3B){
+        wait_ticks(10);
+        int b = (10/0);
+    }
     if(scan_code > 58 || !kernelStarted) return;
     _printf("%c", ascii[scan_code]);
 }

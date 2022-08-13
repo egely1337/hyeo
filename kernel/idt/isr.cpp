@@ -106,9 +106,10 @@ extern "C" void isr_handler(Registers r) {
     clear_screen();
     wait_ticks(10);
     _printf(
-        "-------KERNEL PANIC!-------\nCPU MESSAGE [%s]\nEDI: %d\t\tESP: %d\nEBP: %d\t\t EAX: %d\n",
+        "-------KERNEL PANIC!-------\nCPU MESSAGE [%s]\nEDI: %d\t\tESP: %d\nEBP: %d\t\tEAX: %d\n",
         exception_messages[r.int_no], r.edi, r.esp,r.ebp,r.eax
     );
+    _printf("ESI: %d\t\tEBX: %d\nCS: %d\t\t\t ECX: %d\n", r.esi, r.ebx, r.cs, r.ecx);
     asm("hlt");
 }
 
