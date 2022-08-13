@@ -2,7 +2,6 @@
 
 
 
-
 uint32_t _timerTicks = 0;
 static void timer_handler(Registers _regs){
     _timerTicks++;
@@ -13,7 +12,7 @@ static void timer_handler(Registers _regs){
 
 void Sleep(uint32_t mill){
     uint32_t loc = _timerTicks + mill;
-    while (_timerTicks < loc)hlt();
+    while (_timerTicks < loc) hlt();
 }
 
 void init_timer(void){

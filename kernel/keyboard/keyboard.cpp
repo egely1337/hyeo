@@ -8,10 +8,12 @@ const char ascii[] = { '?', '?', '1', '2', '3', '4', '5', '6',
     'B', 'N', 'M', ',', '.', '/', '?', '?', '?', ' '
 };
 
+extern "C" bool kernelStarted;
+char input[128];
 
 void keyboard_handler(Registers _regs){
     uint8_t scan_code = inb(0x60);
-    if(scan_code > 58) return;
+    if(scan_code > 58 || !kernelStarted) return;
     _printf("%c", ascii[scan_code]);
 }
 void init_keyboard(void){
