@@ -11,13 +11,9 @@ static void timer_handler(Registers _regs){
     }
 }
 
-void Sleep(uint32_t seconds){
-    uint32_t loc = _timerTicks + 100 * seconds;
-    while (_timerTicks < loc)
-    {
-        hlt();
-    }
-    
+void Sleep(uint32_t mill){
+    uint32_t loc = _timerTicks + mill;
+    while (_timerTicks < loc)hlt();
 }
 
 void init_timer(void){

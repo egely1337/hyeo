@@ -1,5 +1,6 @@
 #include "tty.h"
 #include "../mem/memory.h"
+#include "../timer/timer.h"
 
 void SetCursorPosition(uint16_t position){
     outb(0x3D4,0x0F);
@@ -23,17 +24,35 @@ void clear_screen(void){
     SetCursorPosition(cursorPosition.returnRawPosition());
 }
 
+void clear_col(int col){
+    uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY + (160 * col);
+    for(int i = 0; i < 80; i++){
+        *(VGA_MEM + i * 2) = 0;  
+        *(VGA_MEM + i * 2+1) = 7;  
+    }
+}
+
 void resetCursorPosition(void){
     cursorPosition.x = 0;
     cursorPosition.y = 0;
 }
 
-void print_char(char s)
+void print_char(char s, uint16_t color)
 {
-    *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
-    cursorPosition.x++; 
-    SetCursorPosition(cursorPosition.returnRawPosition());
+    if(cursorPosition.returnRawPosition() >= 2000){
+        memcut((void*)0xB8000, (void*)(0xB8000 + (80 * 2)), 3840);
+        cursorPosition.x = 0;
+        cursorPosition.y = 24;
+        SetCursorPosition(cursorPosition.returnRawPosition());
+        clear_col(24);
+    } else{
+        *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
+        *(VGA_MEMORY + cursorPosition.returnRawPosition() *2 + 1) = color;
+        cursorPosition.x++; 
+        SetCursorPosition(cursorPosition.returnRawPosition());
+    }
 }
+
 void printf(const char* _text){
     uint8_t* data = (uint8_t*)_text; 
     while(*data != 0){
@@ -46,7 +65,7 @@ void printf(const char* _text){
                 data++;
                 break;
             default:
-                print_char(*data);
+                print_char(*data,VGA_WHITEGRAY);
                 data++;  
                 break;
         }
@@ -89,17 +108,17 @@ void _printf(const char* fmt, ...){
                     }
                     case 'c': {
                         ignored = data+1;
-                        print_char(*(char*)argp);
+                        print_char(*(char*)argp,VGA_WHITEGRAY);
                         argp++;
                         break;
                     }
                     default:
-                        print_char('%');
+                        print_char('%',VGA_WHITEGRAY);
                         break;
                 }
             default:
                 if(ignored != data && ((*data != '%' && *(data + 1) != 'd')|| (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')))   
-                    print_char(*data);
+                    print_char(*data,VGA_WHITEGRAY);
                 data++;  
                 break;
         }
@@ -161,21 +180,24 @@ void printInteger(int _data){
             switch (i)
             {
             case 0:
-                print_char('0' + tensThousands);
+                print_char('0' + tensThousands,VGA_WHITEGRAY);
                 break;
             case 1:
-                print_char('0' + thousands);
+                print_char('0' + thousands,VGA_WHITEGRAY);
                 break;
             case 2:
-                print_char('0' + hundreds);
+                print_char('0' + hundreds,VGA_WHITEGRAY);
                 break;
             case 3:
-                print_char('0' + tens);
+                print_char('0' + tens,VGA_WHITEGRAY);
                 break;
             case 4:
-                print_char('0' + ones);
+                print_char('0' + ones,VGA_WHITEGRAY);
                 break;                
             }
         }
         
     }
+void _printCurrentEntries(void){
+    _printf("%d", cursorPosition.returnRawPosition());
+}
