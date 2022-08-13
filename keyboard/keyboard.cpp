@@ -9,6 +9,7 @@ const char ascii[] = { '?', '?', '1', '2', '3', '4', '5', '6',
 };
 
 extern "C" bool kernelStarted;
+char input[128];
 
 void keyboard_handler(Registers _regs){
     uint8_t scan_code = inb(0x60);

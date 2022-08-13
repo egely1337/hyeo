@@ -10,6 +10,7 @@ extern "C" bool kernelStarted = false;
 
 extern "C" int _kmain(){
     clear_screen();
+    _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
     printOK("Screen has been cleared.\n");
     isr_install();
     printOK("ISR's has been installed.\n");
@@ -18,6 +19,8 @@ extern "C" int _kmain(){
     init_timer();
     init_keyboard();
     printOK("Timer has been init.\n");
+    Sleep(20);
+    printOK("Keyboard IRQ has been init.\n");
     Sleep(200);
     _printf("Welcome to hyeoOS!\n");
     Sleep(100);
