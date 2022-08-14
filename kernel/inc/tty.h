@@ -19,6 +19,7 @@ struct
 
 
 void SetCursorPosition(uint16_t position);
+void deleteOneCharacter(void);
 void clear_screen(void);
 void print_char(char s, uint16_t color);
 void printf(const char* _text);
@@ -28,3 +29,5 @@ void resetCursorPosition(void);
 void _printf(const char* fmt, ...); //Unsecure function
 void _printCurrentEntries(void);
 void clear_col(int col);
+void clear_screen_color(uint16_t backcolour, uint16_t forecolour);
+void _setCursorPosition(uint16_t x, uint16_t y);

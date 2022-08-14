@@ -13,7 +13,7 @@ uint8_t inb(uint16_t port){
 }
 
 void wait_ticks(uint32_t seconds){
-    for(uint32_t i = 0; i < 10000*seconds; i++){
+    for(uint32_t i = 0; i < 100*seconds; i++){
         Nop();
     }
 }

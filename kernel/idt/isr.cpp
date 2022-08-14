@@ -103,13 +103,23 @@ char *exception_messages[] = {
 };
 
 extern "C" void isr_handler(Registers r) {
-    clear_screen();
-    wait_ticks(10);
-    _printf(
-        "-------KERNEL PANIC!-------\nCPU MESSAGE [%s]\nEDI: %d\t\tESP: %d\nEBP: %d\t\tEAX: %d\n",
-        exception_messages[r.int_no], r.edi, r.esp,r.ebp,r.eax
-    );
-    _printf("ESI: %d\t\tEBX: %d\nCS: %d\t\t\t ECX: %d\n", r.esi, r.ebx, r.cs, r.ecx);
+    clear_screen_color(VGA_RED,VGA_WHITEGRAY);
+    wait_ticks(30);
+    cli();  
+    _setCursorPosition(0,0);
+    wait_ticks(30);;
+    _printf("----------------------------------KERNEL PANIC----------------------------------");
+    wait_ticks(30);
+    _setCursorPosition(28,0);
+    _printf("\n\tYour os encountered an error and needs restart. [%s]\n",exception_messages[r.int_no]);
+    _printf("REGISTER DATA\n");
+    _printf("EAX: %c\n", (int)r.eax);
+    _printf("EBX: %c\n", (int)r.ebx);
+    _printf("ESI: %c\n", (int)r.esi);
+    _printf("EBP: %c\n", (int)r.ebp);
+    _printf("CS: %c\n", (int)r.ebp);
+    _printf("EDI: %c\n", (int)r.edi);
+    _printf("EDX: %c\n", (int)r.edx);
     asm("hlt");
 }
 

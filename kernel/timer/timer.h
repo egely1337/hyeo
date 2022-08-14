@@ -8,3 +8,5 @@
 static void timer_handler(Registers _regs);
 void init_timer(void);
 void Sleep(uint32_t seconds);
+uint32_t getTicks(void);
+uint32_t getSeconds(void);

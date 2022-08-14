@@ -10,7 +10,7 @@ wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestan
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/inc/tty.cpp" -o "tty.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/idt.cpp" -o "idtc.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/isr.cpp" -o "isrc.o"
-wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-ld --oformat binary -Ttext 0x8000 "init.o" "mem.o" "idtc.o" "isr.o" "keyboard.o" "timer.o" "io.o" "tty.o"  "isrc.o" "kernel.o"  -o "kernel.bin"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-ld --oformat binary -Ttext 0x8000 "init.o" "mem.o" "idtc.o" "isr.o" "keyboard.o" "timer.o" "io.o" "tty.o"  "isrc.o" "kernel.o" "vs.o"  -o "kernel.bin"
 copy /b bootloader.bin+kernel.bin+program.bin hyeo-i386.flp
 move hyeo-i386.flp ./build/x86_64/
 del bootloader.bin
@@ -26,4 +26,5 @@ del io.o
 del tty.o 
 del mem.o
 del timer.o
+del panic.o
 qemu-system-i386.exe build/x86_64/hyeo-i386.flp -m 512M

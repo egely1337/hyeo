@@ -7,6 +7,7 @@
 
 
 extern "C" bool kernelStarted = false;
+extern "C" char program[];
 
 extern "C" int _kmain(){
     clear_screen();
@@ -24,13 +25,12 @@ extern "C" int _kmain(){
     Sleep(200);
     _printf("Welcome to hyeoOS!\n");
     Sleep(100);
-    kernelStarted = true;
     _printf("hyeo@user$- ");
+    kernelStarted = true;
     while (true)
     {
         Sleep(10);
     }
-    
     
 
 

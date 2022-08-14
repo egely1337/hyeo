@@ -13,11 +13,32 @@ uint16_t poscords(uint16_t x, uint16_t y){
     return y * VGA_WIDTH + x;
 }
 
+void _setCursorPosition(uint16_t x, uint16_t y){
+    cursorPosition.x = x;
+    cursorPosition.y = y;
+    SetCursorPosition(cursorPosition.returnRawPosition());
+}
+
 void clear_screen(void){
     uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
     uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
     for(int i = 0; i < maxSize; i++){
         *(VGA_MEM + i * 2) = 0; 
+    }
+    cursorPosition.x = 0;
+    cursorPosition.y = 0;
+    SetCursorPosition(cursorPosition.returnRawPosition());
+}
+
+
+void clear_screen_color(uint16_t backcolour, uint16_t forecolour){
+    uint8_t attrib = (backcolour << 4) | (forecolour & 0x0F);
+    uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
+    uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
+    for(int i = 0; i < maxSize; i++){
+        wait_ticks(1);
+        *(VGA_MEM + i * 2) = 0;  
+        *(VGA_MEM + i * 2+1) = attrib;
     }
     cursorPosition.x = 0;
     cursorPosition.y = 0;
@@ -37,6 +58,14 @@ void resetCursorPosition(void){
     cursorPosition.y = 0;
 }
 
+void deleteOneCharacter(void){
+    cursorPosition.x--;
+    SetCursorPosition(cursorPosition.returnRawPosition());
+    print_char(0,VGA_WHITEGRAY);
+    cursorPosition.x--;
+    SetCursorPosition(cursorPosition.returnRawPosition());
+}
+
 void print_char(char s, uint16_t color)
 {
     if(cursorPosition.returnRawPosition() >= 2000){
@@ -45,6 +74,10 @@ void print_char(char s, uint16_t color)
         cursorPosition.y = 24;
         SetCursorPosition(cursorPosition.returnRawPosition());
         clear_col(24);
+        *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
+        *(VGA_MEMORY + cursorPosition.returnRawPosition() *2 + 1) = color;
+        cursorPosition.x++; 
+        SetCursorPosition(cursorPosition.returnRawPosition());
     } else{
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2 + 1) = color;
