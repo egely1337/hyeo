@@ -9,6 +9,7 @@
   5. Interrupt Descriptor Table
   6. IRQ's
   7. Text-Mode Support
+  8. Syscalls
   
 # TODO
   1. Full Support on Text-Mode
