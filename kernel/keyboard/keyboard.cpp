@@ -20,9 +20,18 @@ void keyboard_handler(Registers _regs){
     if(scan_code == 0x1C){
         input[current+1] = '\0';
         if(!strcmp(input, "crash")){
-            memcpy((void*)0xAF000,program,4200);
-            asm("jmp 0xAF000");
+            int b = (5/0);
         } 
+        if(!strcmp(input,"program.bin")){
+            printf("\n");
+            memcpy((void*)0x12000,program,4264);
+            ((void (*)())0x12000)();  
+        }
+        if(!strcmp(input,"experimental")){
+            for(int i = 0; i < 10; i++){
+                _printf("i: %d\n", i);
+            }
+        }
         if(!strcmp(input,"help")){
             _printf(
                 "\n\nCommands:\nclear: will clear your screen\ncrash: will crash your os\nhelp: will show this message\nticks: will show sys ticks\nauthor: will show the author.\nreboot: will reboot your computer\n"

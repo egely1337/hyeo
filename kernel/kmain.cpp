@@ -4,6 +4,7 @@
 #include "timer/timer.h"
 #include "keyboard/keyboard.h"
 #include "utils/kernutils.hpp"
+#include "syscall/syscall.h"
 
 
 bool kernelStarted = false;
@@ -19,6 +20,7 @@ extern "C" int _kmain(){
     printOK("Enabled interrupts.\n");
     init_timer();
     init_keyboard();
+    sys_call_init();
     printOK("Timer IRQ has been init.\n");
     Sleep(20);
     printOK("Keyboard IRQ has been init.\n");

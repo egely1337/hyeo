@@ -3,6 +3,7 @@ nasm kernel/kernel.asm -f elf32 -o init.o
 nasm kernel/idt/interrupts.asm -f elf32 -o isr.o
 nasm kernel/vs.asm -f elf32 -o vs.o
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/kmain.cpp" -o "kernel.o"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/syscall/syscall.cpp" -o "syscall.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/keyboard/keyboard.cpp" -o "keyboard.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/timer/timer.cpp" -o "timer.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/mem/memory.cpp" -o "mem.o"
@@ -10,7 +11,7 @@ wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestan
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/inc/tty.cpp" -o "tty.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/idt.cpp" -o "idtc.o"
 wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-gcc -ffreestanding -m32 -g -c "./kernel/idt/isr.cpp" -o "isrc.o"
-wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-ld --oformat binary -Ttext 0x8000 "init.o" "mem.o" "idtc.o" "isr.o" "keyboard.o" "timer.o" "io.o" "tty.o"  "isrc.o" "kernel.o" "vs.o"  -o "kernel.bin"
+wsl /home/hyper/i386-elf/i386-elf-7.5.0-Linux-x86_64/bin/i386-elf-ld --oformat binary -Ttext 0x8000 "init.o" "syscall.o" "mem.o" "idtc.o" "isr.o" "keyboard.o" "timer.o" "io.o" "tty.o"  "isrc.o" "kernel.o" "vs.o"  -o "kernel.bin"
 copy /b bootloader.bin+kernel.bin+program.bin hyeo-i386.flp
 move hyeo-i386.flp ./build/x86_64/
 del bootloader.bin
@@ -20,6 +21,7 @@ del kernel.o
 del keyboard.o
 del init.o 
 del isr.o
+del syscall.o
 del isrc.o 
 del idtc.o 
 del io.o 
