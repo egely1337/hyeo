@@ -2,6 +2,7 @@
 #include "../mem/memory.h"
 #include "../timer/timer.h"
 
+
 void SetCursorPosition(uint16_t position){
     outb(0x3D4,0x0F);
     outb(0x3D5, (uint8_t)(position & 0xFF));
@@ -12,7 +13,6 @@ void SetCursorPosition(uint16_t position){
 uint16_t poscords(uint16_t x, uint16_t y){
     return y * VGA_WIDTH + x;
 }
-
 void _setCursorPosition(uint16_t x, uint16_t y){
     cursorPosition.x = x;
     cursorPosition.y = y;
@@ -32,17 +32,16 @@ void clear_screen(void){
 
 
 void clear_screen_color(uint16_t backcolour, uint16_t forecolour){
-    uint8_t attrib = (backcolour << 4) | (forecolour & 0x0F);
-    uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
-    uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
-    for(int i = 0; i < maxSize; i++){
-        wait_ticks(1);
-        *(VGA_MEM + i * 2) = 0;  
-        *(VGA_MEM + i * 2+1) = attrib;
-    }
     cursorPosition.x = 0;
     cursorPosition.y = 0;
     SetCursorPosition(cursorPosition.returnRawPosition());
+    volatile uint8_t attrib = (backcolour << 4) | (forecolour & 0x0F);
+    volatile uint32_t maxSize = MAX_ROWS * VGA_WIDTH;
+    volatile uint8_t* VGA_MEM = (uint8_t*)VGA_MEMORY;
+    for(volatile int i = 0; i < maxSize; i++){
+        *(VGA_MEM + i * 2) = 0;  
+        *(VGA_MEM + i * 2+1) = attrib;
+    }
 }
 
 void clear_col(int col){

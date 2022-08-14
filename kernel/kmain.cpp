@@ -6,34 +6,35 @@
 #include "utils/kernutils.hpp"
 
 
-extern "C" bool kernelStarted = false;
+bool kernelStarted = false;
 extern "C" char program[];
 
 extern "C" int _kmain(){
     clear_screen();
+    sti(); // enable interrupts
     _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
     printOK("Screen has been cleared.\n");
     isr_install();
     printOK("ISR's has been installed.\n");
-    sti(); // enable interrupts
     printOK("Enabled interrupts.\n");
     init_timer();
     init_keyboard();
-    printOK("Timer has been init.\n");
+    printOK("Timer IRQ has been init.\n");
     Sleep(20);
     printOK("Keyboard IRQ has been init.\n");
     Sleep(200);
     _printf("Welcome to hyeoOS!\n");
     Sleep(100);
-    _printf("hyeo@user$- ");
     kernelStarted = true;
+    _printf("hyeo@user$- ");
+
+
     while (true)
     {
-        Sleep(10);
+        Sleep(200);
     }
     
 
 
-
-    return -123;
+    return -1;
 }

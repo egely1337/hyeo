@@ -21,7 +21,7 @@ uint32_t getSeconds(void){
 
 void Sleep(uint32_t mill){
     uint32_t loc = _timerTicks + mill;
-    while (_timerTicks < loc) hlt();
+    while (_timerTicks < loc) Nop();
 }
 
 void init_timer(void){

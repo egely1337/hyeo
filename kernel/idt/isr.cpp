@@ -112,14 +112,14 @@ extern "C" void isr_handler(Registers r) {
     wait_ticks(30);
     _setCursorPosition(28,0);
     _printf("\n\tYour os encountered an error and needs restart. [%s]\n",exception_messages[r.int_no]);
-    _printf("REGISTER DATA\n");
-    _printf("EAX: %c\n", (int)r.eax);
-    _printf("EBX: %c\n", (int)r.ebx);
-    _printf("ESI: %c\n", (int)r.esi);
-    _printf("EBP: %c\n", (int)r.ebp);
-    _printf("CS: %c\n", (int)r.ebp);
-    _printf("EDI: %c\n", (int)r.edi);
-    _printf("EDX: %c\n", (int)r.edx);
+    //_printf("REGISTER DATA\n");
+    //_printf("EBX: %d \n", (int)(&r.ebx));
+    //_printf("EAX: %d \n", (int)(&r.eax));
+    //_printf("ESI: %d \n", (int)(&r.esi));
+    //_printf("EBP: %d \n", (int)(&r.ebp));
+    //_printf("CS: %d \n", (int)(&r.ebp));
+    //_printf("EDI: %d \n", (int)(&r.edi));
+    //_printf("EDX: %d \n", (int)(&r.edx));
     asm("hlt");
 }
 
