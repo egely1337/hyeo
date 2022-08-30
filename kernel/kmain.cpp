@@ -14,6 +14,7 @@ extern "C" int _kmain(){
     clear_screen();
     sti(); // enable interrupts
     _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
+    _printf("Hello World from Linux Build!\n");
     printOK("Screen has been cleared.\n");
     isr_install();
     printOK("ISR's has been installed.\n");
@@ -24,9 +25,7 @@ extern "C" int _kmain(){
     printOK("Timer IRQ has been init.\n");
     Sleep(20);
     printOK("Keyboard IRQ has been init.\n");
-    Sleep(200);
     _printf("Welcome to hyeoOS!\n");
-    Sleep(100);
     kernelStarted = true;
     _printf("hyeo@user$- ");
 
