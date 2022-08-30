@@ -44,4 +44,4 @@ run:
 commit:
 	git add ./
 	git commit -am "push from makefile"
-	git push origin master
+	git push origin main
