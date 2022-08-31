@@ -31,3 +31,4 @@ void _printCurrentEntries(void);
 void clear_col(int col);
 void clear_screen_color(uint16_t backcolour, uint16_t forecolour);
 void _setCursorPosition(uint16_t x, uint16_t y);
+void _t(void);

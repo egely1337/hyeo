@@ -52,7 +52,8 @@ void keyboard_handler(Registers _regs){
         for(volatile int i = 0; i < 128; i++){
             input[i] = 0;
         }
-        _printf("\n\nhyeo@user$- ");
+        _printf("\nhyeo@user$- ")
+        ;
         return;
     }
     if(scan_code == 0x0E){

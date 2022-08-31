@@ -106,6 +106,20 @@ void printf(const char* _text){
     }
 }
 
+void _t(void){
+    if(cursorPosition.y != 24) {
+        cursorPosition.x = 0;
+        cursorPosition.y++;
+        SetCursorPosition(cursorPosition.returnRawPosition());
+    } else{
+        memcut((void*)0xB8000, (void*)(0xB8000 + (80*2)), 3840);
+        cursorPosition.x = 0;
+        cursorPosition.y = 24;
+        SetCursorPosition(cursorPosition.returnRawPosition());
+    }
+    /* I dont know how i solved tf problem. */
+}
+
 
 void _printf(const char* fmt, ...){
     int* argp = (int*)&fmt;
@@ -116,9 +130,7 @@ void _printf(const char* fmt, ...){
          switch (*data)
         {
             case '\n':
-                cursorPosition.x = 0;
-                cursorPosition.y++;
-                SetCursorPosition(cursorPosition.returnRawPosition());
+                _t();
                 data++;
                 break;
             case '\t':
