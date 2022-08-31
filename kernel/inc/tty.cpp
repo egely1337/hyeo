@@ -73,11 +73,13 @@ void print_char(char s, uint16_t color)
         cursorPosition.y = 24;
         SetCursorPosition(cursorPosition.returnRawPosition());
         clear_col(24);
+        if(cursorPosition.x > VGA_WIDTH) {++cursorPosition.y; cursorPosition.x = 0; SetCursorPosition(cursorPosition.returnRawPosition());}
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2 + 1) = color;
         cursorPosition.x++; 
         SetCursorPosition(cursorPosition.returnRawPosition());
     } else{
+        if(cursorPosition.x > VGA_WIDTH) {++cursorPosition.y; cursorPosition.x = 0; SetCursorPosition(cursorPosition.returnRawPosition());}
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2) = s;
         *(VGA_MEMORY + cursorPosition.returnRawPosition() *2 + 1) = color;
         cursorPosition.x++; 
