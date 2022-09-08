@@ -27,8 +27,19 @@ extern "C" int _kmain(){
     _printf("Welcome to hyeoOS!\n\n\n");
     run_block(shell,4264);
     clear_block(4264);
+
+
     printf("\nRebooting.");
-    Sleep(100);
+    Sleep(25);
+    print_char('.',VGA_WHITEGRAY);
+    Sleep(25);
+    print_char('.',VGA_WHITEGRAY);
+    Sleep(25);
+    print_char('.',VGA_WHITEGRAY);
+    Sleep(25);
+    print_char('.',VGA_WHITEGRAY);
+    
+    
     Reboot();
     return -1;
 }
