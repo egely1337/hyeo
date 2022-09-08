@@ -13,6 +13,7 @@
 #define SYS_READCHAR 6
 #define SYS_DELETEONECHARACTER 7
 #define SYS_SLEEP 8
+#define SYS_BOOT_SECONDS 9
 
 
 

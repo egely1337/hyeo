@@ -1,5 +1,6 @@
 #include "inc/stdio.h"
 #include "inc/string.h"
+#include "inc/hyeo.h"
 char line[128];
 
 void clearLineCache(void){
@@ -16,6 +17,9 @@ extern "C" int _start(){
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "reboot")) printf("\nRebooting...");
         if(!strcmp(line, "clear")) clear();
+        if(!strcmp(line, "author")){printf(
+            "Author: %s", "\n\n[https://github.com/hyper1923/hyeo]"
+        );}
         /*
         if(!strcmp(line, "sleep")) Sleep(100);
         TODO: Fix the bug.

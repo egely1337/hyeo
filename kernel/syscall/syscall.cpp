@@ -55,6 +55,11 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         Sleep(*((int*)mem));
         break;
     }
+    case SYS_BOOT_SECONDS:{
+        uint32_t* b = (uint32_t*)0x0;
+        *b = getSeconds();
+        break;
+    }
     default:
         break;
     }
