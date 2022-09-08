@@ -18,7 +18,7 @@ extern "C" int _start(){
         if(!strcmp(line, "reboot")) printf("\nRebooting...");
         if(!strcmp(line, "clear")) clear();
         if(!strcmp(line, "author")){printf(
-            "Author: %s", "\n\n[https://github.com/hyper1923/hyeo]"
+            "\n\nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
         );}
         /*
         if(!strcmp(line, "sleep")) Sleep(100);

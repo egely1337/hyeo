@@ -56,6 +56,7 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         break;
     }
     case SYS_BOOT_SECONDS:{
+        /* TODO: you need fix timer */
         uint32_t* b = (uint32_t*)0x0;
         *b = getSeconds();
         break;
