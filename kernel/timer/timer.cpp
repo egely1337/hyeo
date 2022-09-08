@@ -5,6 +5,7 @@
 uint32_t _timerTicks = 0;
 static void timer_handler(Registers _regs){
     _timerTicks++;
+    print_char('.');
     if(_timerTicks == 0xFFFFFFFF){
         _timerTicks = 0;
     }
