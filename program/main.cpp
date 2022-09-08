@@ -20,6 +20,10 @@ extern "C" int _start(){
         if(!strcmp(line, "author")){printf(
             "\n\nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
         );}
+        if(!strcmp(line, "help")){
+            printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nreboot: %s\n "
+            , "will show this", "will show the author", "will clear the screen", "will reboot the screen");
+        }
         /*
         if(!strcmp(line, "sleep")) Sleep(100);
         TODO: Fix the bug.
