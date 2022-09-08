@@ -25,7 +25,11 @@ extern "C" int _kmain(){
     printOK("Timer IRQ has been init.\n");
     Sleep(20);
     printOK("Keyboard IRQ has been init.\n");
-    _printf("Welcome to hyeoOS!\n");
-    run_block(shell);
+    _printf("Welcome to hyeoOS!\n\n\n");
+    run_block(shell,4264);
+    clear_block(4264);
+    printf("\nRebooting.");
+    Sleep(100);
+    Reboot();
     return -1;
 }

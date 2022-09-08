@@ -7,13 +7,24 @@ void clearLineCache(void){
 }
 
 extern "C" int _start(){
-    printf("\n\nWelcome to hyeoShell!\n");
+    /*Shell Init Area*/
+    printf("Welcome to hyeoShell!\n");
     clearLineCache();
     while(true){
-        printf("\nroot-hyeo > "); readLine(&line[0]);
+
+        /*Shell Area*/
+        printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "reboot")) printf("\nRebooting...");
         if(!strcmp(line, "clear")) clear();
+        if(!strcmp(line, "exit")) break;
+
+        /*End of Shell Area*/
+
+
+
+        /*Reinit Area*/
         clearLineCache();
+        printf("\n");
     }
     exit(EXIT_SUCCESS);
 }   
