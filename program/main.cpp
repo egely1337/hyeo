@@ -1,9 +1,18 @@
 #include "inc/stdio.h"
-int cursor = 0;
+#include "inc/string.h"
+char line[128];
+
+void clearLineCache(void){
+    for(uint32_t i = 0; i < 128; i++) line[i] = 1;
+}
+
 extern "C" int _start(){
-    printf("Welcome to hyeoShell!");
+    printf("\n\nWelcome to hyeoShell!\n");
+    clearLineCache();
     while(true){
-        printf("root-hyeoUser$- ");print_char(readChar());
+        printf("\nroot-hyeoUser$- "); readLine(&line[0]);
+        if(!strcmp(line, "reboot")) printf("\nRebooting...");
+        clearLineCache();
     }
     exit(EXIT_SUCCESS);
 }   

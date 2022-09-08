@@ -3,18 +3,6 @@
 
 char* mem = 0x0;
 
-uint32_t strlen(char* data){
-    char* _data = (char*)data;
-    uint32_t size = 0;
-    while(*_data != '\0') {
-        size++;
-        _data++;
-    }
-    return size;
-}
-
-
-
 char* _ttyPrintInteger(int _integer){
     int i;
     char* txt; 
@@ -35,30 +23,36 @@ char* _ttyPrintInteger(int _integer){
 
     return txt;
 }
-
 void set_args(char type, char arg1,char arg2, char arg3){
     mem[82] = type;
     mem[83] = arg1;
     mem[84] = arg2;
     mem[84] = arg3;
 }
-
 void print_char(char b){
     set_args(1,b,0,0);
     asm("int $110");
 }
-
+void readLine(char *data){
+    char* copy = (char*)data;
+    while(*data != '\0'){
+        uint8_t b = readChar();
+        if(b == 0x3F) break;
+        *data = b;
+        data++;
+        print_char(b);
+    }
+    *data = '\0';
+}
 void clear(void){
     set_args(0,0,0,0);
     asm("int $110");
 }
-
 char readChar(void){
     set_args(6,0,0,0);
     asm("int $110");
     return *(char*)0x0;
 }
-
 void printf(const char* fmt, ...){
     int* argp = (int*)&fmt;
     argp += sizeof(fmt) / sizeof(int);
@@ -105,8 +99,6 @@ void printf(const char* fmt, ...){
         }
     }
 }
-
-
 void exit(uint32_t exit_code){
     set_args(4,(uint8_t)exit_code,0,0);
     asm("int $110");

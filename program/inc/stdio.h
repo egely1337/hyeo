@@ -1,5 +1,6 @@
 #pragma once
 #include "typedefs.h"
+#include "string.h"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE -1
@@ -10,5 +11,5 @@ void clear(void);
 void print_char(char b);
 void printf(const char *fmt, ...);
 char readChar(void);
-uint32_t strlen(char* data);
+void readLine(char* data);
 void exit(uint32_t exit_code);

@@ -23,7 +23,6 @@ succ:
 
 %include "bootloader/print.asm"
 %include "kernel/gdt.asm"
-%include "kernel/paging.asm"
 
 
 
