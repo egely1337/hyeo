@@ -17,7 +17,7 @@ extern "C" int _start(){
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear")) clear();
         if(!strcmp(line, "author")){printf(
-            "\n\nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
+            "\n \nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
         );}
         if(!strcmp(line, "help")){
             printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\n "
@@ -37,5 +37,5 @@ extern "C" int _start(){
         clearLineCache();
         printf("\n");
     }
-    exit(EXIT_SUCCESS);
+    exit(EXIT_FAILURE);
 }   

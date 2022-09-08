@@ -116,8 +116,9 @@ void printf(const char* fmt, ...){
         }
     }
 }
-void exit(uint32_t exit_code){
-    set_args(4,(uint8_t)exit_code,0,0);
+void exit(int exit_code){
+    set_args(4,0,0,0);
+    *(int*)0x0 = exit_code;
     asm("int $110");
     return;
 }
