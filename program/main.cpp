@@ -16,6 +16,10 @@ extern "C" int _start(){
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "reboot")) printf("\nRebooting...");
         if(!strcmp(line, "clear")) clear();
+        /*
+        if(!strcmp(line, "sleep")) Sleep(100);
+        TODO: Fix the bug.
+        */
         if(!strcmp(line, "exit")) break;
 
         /*End of Shell Area*/

@@ -12,6 +12,7 @@
 #define SYS_RANDOM 5
 #define SYS_READCHAR 6
 #define SYS_DELETEONECHARACTER 7
+#define SYS_SLEEP 8
 
 
 

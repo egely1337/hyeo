@@ -39,7 +39,6 @@ extern "C" int _kmain(){
     Sleep(25);
     print_char('.',VGA_WHITEGRAY);
     
-    
     Reboot();
     return -1;
 }

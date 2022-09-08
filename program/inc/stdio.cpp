@@ -62,6 +62,14 @@ char readChar(void){
     asm("int $110");
     return *(char*)0x0;
 }
+
+void Sleep(uint32_t mill){
+    set_args(8,0,0,0);
+    int* b = (int*)0x0;
+    *b = mill;
+    asm("int $110");
+}
+
 void printf(const char* fmt, ...){
     int* argp = (int*)&fmt;
     argp += sizeof(fmt) / sizeof(int);
@@ -69,7 +77,7 @@ void printf(const char* fmt, ...){
     uint8_t* data = (uint8_t*)fmt;
     while(*data != 0){
          switch (*data)
-        {
+         {
             case '\n':
                 set_args(2,0,0,0);
                 asm("int $110");

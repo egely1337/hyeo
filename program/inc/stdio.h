@@ -18,3 +18,5 @@ void printf(const char *fmt, ...);
 char readChar(void);
 void readLine(char* data);
 void exit(uint32_t exit_code);
+void deleteOneCharacter(void);
+void Sleep(uint32_t mill);

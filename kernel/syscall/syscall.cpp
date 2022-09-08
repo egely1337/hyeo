@@ -51,6 +51,10 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         deleteOneCharacter();
         break;
     }
+    case SYS_SLEEP:{
+        Sleep(*((int*)mem));
+        break;
+    }
     default:
         break;
     }
