@@ -1,8 +1,9 @@
 #include "inc/stdio.h"
+int cursor = 0;
 extern "C" int _start(){
     printf("Welcome to hyeoShell!");
-    //while(true){
-        //print_char(readChar());
-    //}
+    while(true){
+        printf("root-hyeoUser$- ");print_char(readChar());
+    }
     exit(EXIT_SUCCESS);
 }   
