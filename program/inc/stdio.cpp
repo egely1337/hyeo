@@ -37,7 +37,8 @@ void readLine(char *data){
     char* copy = (char*)data;
     while(*data != '\0'){
         uint8_t b = readChar();
-        if(b == 0x3F) break;
+        if(b == 0x1C) break;
+        b = ascii[b];
         *data = b;
         data++;
         print_char(b);

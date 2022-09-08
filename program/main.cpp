@@ -10,8 +10,9 @@ extern "C" int _start(){
     printf("\n\nWelcome to hyeoShell!\n");
     clearLineCache();
     while(true){
-        printf("\nroot-hyeoUser$- "); readLine(&line[0]);
+        printf("\nroot-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "reboot")) printf("\nRebooting...");
+        if(!strcmp(line, "clear")) clear();
         clearLineCache();
     }
     exit(EXIT_SUCCESS);

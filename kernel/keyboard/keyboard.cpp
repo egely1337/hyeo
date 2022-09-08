@@ -32,9 +32,9 @@ char readChar()
 			else if (inb(0x60) == 0xAA && isShift)
 				isShift = 0;
 			if (!isShift)
-				out = ascii[inb(0x60)];
+				out = inb(0x60);
 			else if (isShift)
-				out = ascii[inb(0x60)];
+				out = inb(0x60);
 			if (out != 0 && inb(0x60) < 60)
 				run = 0;
 		}
