@@ -7,8 +7,8 @@
 #include "syscall/syscall.h"
 
 
-bool kernelStarted = false;
-extern "C" char program[];
+extern "C" char shell[];
+
 
 extern "C" int _kmain(){
     clear_screen();
@@ -26,16 +26,8 @@ extern "C" int _kmain(){
     Sleep(20);
     printOK("Keyboard IRQ has been init.\n");
     _printf("Welcome to hyeoOS!\n");
-    kernelStarted = true;
-    _printf("hyeo@user$- ");
-
-
-    while (true)
-    {
-        Sleep(200);
-    }
-    
-
-
+    /*copy the shell to 0x12000 and jump it*/
+    memcpy((void*)0x12000,shell,4264);
+    ((void (*)())0x12000)(); 
     return -1;
 }

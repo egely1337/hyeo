@@ -2,7 +2,7 @@
 #include "../inc/typedefs.h"
 #include "../inc/tty.h"
 #include "../mem/memory.h"
-
+#include "../keyboard/keyboard.h"
 
 #define SYS_CLEAR_SCREEN 0
 #define SYS_PRINT_CHAR 1
@@ -10,7 +10,7 @@
 #define SYS_PRINT_INTEGER 3
 #define SYS_PROCESS_EXIT 4
 #define SYS_RANDOM 5
-
+#define SYS_READCHAR 6
 
 
 

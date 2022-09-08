@@ -1,3 +1,3 @@
-global program
-program:
+global shell
+shell:
     incbin "program.bin"

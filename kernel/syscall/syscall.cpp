@@ -42,6 +42,11 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
     case SYS_RANDOM:
         break;
 
+    case SYS_READCHAR: {
+        char* b = (char*)0x0;
+        *b = readChar();
+        break;
+    }
     default:
         break;
     }

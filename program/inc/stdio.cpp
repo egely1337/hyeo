@@ -14,6 +14,7 @@ uint32_t strlen(char* data){
 }
 
 
+
 char* _ttyPrintInteger(int _integer){
     int i;
     char* txt; 
@@ -50,6 +51,12 @@ void print_char(char b){
 void clear(void){
     set_args(0,0,0,0);
     asm("int $110");
+}
+
+char readChar(void){
+    set_args(6,0,0,0);
+    asm("int $110");
+    return *(char*)0x0;
 }
 
 void printf(const char* fmt, ...){

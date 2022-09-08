@@ -21,6 +21,10 @@ compile:
 	rm bootloader.bin	
 	rm kernel.bin
 
+shell:
+	cd program
+	make 
+	cd ..
 bc:
 	nasm bootloader/bootloader.asm -f bin -o bootloader.bin
 	nasm kernel/kernel.asm -f elf32 -o objects/init.o
