@@ -11,6 +11,8 @@
 #define SYS_PROCESS_EXIT 4
 #define SYS_RANDOM 5
 #define SYS_READCHAR 6
+#define SYS_DELETEONECHARACTER 7
+
 
 
 

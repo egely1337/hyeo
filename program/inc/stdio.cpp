@@ -2,7 +2,10 @@
 
 
 char* mem = 0x0;
-
+void deleteOneCharacter(void){
+    set_args(7,0,0,0);
+    asm("int $110");
+}
 char* _ttyPrintInteger(int _integer){
     int i;
     char* txt; 
@@ -38,10 +41,15 @@ void readLine(char *data){
     while(*data != '\0'){
         uint8_t b = readChar();
         if(b == 0x1C) break;
-        b = ascii[b];
-        *data = b;
-        data++;
-        print_char(b);
+        if(b == 0x0E){
+            deleteOneCharacter();
+            data--;
+        } else{
+            b = ascii[b];
+            *data = b;
+            data++;
+            print_char(b);
+        }
     }
     *data = '\0';
 }

@@ -47,6 +47,10 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         *b = readChar();
         break;
     }
+    case SYS_DELETEONECHARACTER: {
+        deleteOneCharacter();
+        break;
+    }
     default:
         break;
     }
