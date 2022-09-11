@@ -11,7 +11,6 @@ void shell(){
     /*Shell Init Area*/
 
     printf("Welcome to hyeoShell!\n");
-    printf("\n%d\n", (int)&helloWorld);
     clearLineCache(line,128);
     while(true){
         /*Shell Area*/
