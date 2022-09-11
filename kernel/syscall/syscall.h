@@ -16,7 +16,7 @@
 #define SYS_BOOT_SECONDS 9
 #define SYS_KERNEL_MEMCPY 10
 #define SYS_KERNEL_MEMSET 11
-
+#define SYS_CRASH 12
 
 
 

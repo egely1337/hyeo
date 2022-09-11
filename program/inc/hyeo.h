@@ -3,3 +3,4 @@
 #include "string.h"
 
 uint32_t get_boot_seconds(void);
+void crash(void);

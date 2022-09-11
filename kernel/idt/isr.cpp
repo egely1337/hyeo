@@ -69,20 +69,20 @@ void isr_install(void) {
 }
 
 char *exception_messages[] = {
-    "Division By Zero",
-    "Debug",
-    "Non Maskable Interrupt",
-    "Breakpoint",
+    "division by zero",
+    "debug",
+    "non maskable interrupt",
+    "breakpoint",
     "Into Detected Overflow",
     "Out of Bounds",
-    "Invalid Opcode",
+    "invalid opcode",
     "No Coprocessor",
     "Double Fault",
     "Coprocessor Segment Overrun",
-    "Bad TSS",
+    "bad tss",
     "Segment Not Present",
-    "Stack Fault",
-    "General Protection Fault",
+    "stack fault",
+    "general protection fault",
     "Page Fault",
     "Unknown Interrupt",
     "Coprocessor Fault",
@@ -104,24 +104,7 @@ char *exception_messages[] = {
 };
 
 extern "C" void isr_handler(Registers r) {
-    clear_screen_color(VGA_RED,VGA_WHITEGRAY);
-    wait_ticks(30);
-    cli();  
-    _setCursorPosition(0,0);
-    wait_ticks(30);;
-    _printf("----------------------------------KERNEL PANIC----------------------------------");
-    wait_ticks(30);
-    _setCursorPosition(28,0);
-    _printf("\n\tYour os encountered an error and needs restart. [%s]\n",exception_messages[r.int_no]);
-    //_printf("REGISTER DATA\n");
-    //_printf("EBX: %d \n", (int)(&r.ebx));
-    //_printf("EAX: %d \n", (int)(&r.eax));
-    //_printf("ESI: %d \n", (int)(&r.esi));
-    //_printf("EBP: %d \n", (int)(&r.ebp));
-    //_printf("CS: %d \n", (int)(&r.ebp));
-    //_printf("EDI: %d \n", (int)(&r.edi));
-    //_printf("EDX: %d \n", (int)(&r.edx));
-    asm("hlt");
+    panic(exception_messages[r.int_no]);
 }
 
 void register_interrupt_handler(uint8_t n, IsrHandler handler) {

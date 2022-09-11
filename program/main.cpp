@@ -27,6 +27,7 @@ void shell(){
         }
         if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
+        if(!strcmp(line, "crashos")) crash();
         /*End of Shell Area*/
 
 
