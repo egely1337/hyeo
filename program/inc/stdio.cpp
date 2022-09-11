@@ -119,6 +119,12 @@ void printf(const char* fmt, ...){
     }
 }
 void exit(int exit_code){
+
+    set_args(SYS_PROCESS_EXIT,0,0,0);
+    *(int*)0x0 = exit_code;
+    asm("int $110");
+    return;
+}
 void* memcpy(void* dest, void* src, uint32_t size){
     set_args(SYS_KERNEL_MEMCPY,0,0,0);
     uint32_t* mem = (uint32_t*)0x0;

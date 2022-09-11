@@ -2,6 +2,7 @@
 #include "inc/string.h"
 #include "inc/hyeo.h"
 char line[128];
+char lineCopy[128];
 
 void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
@@ -13,6 +14,7 @@ void shell(){
     clearLineCache(line,128);
     while(true){
         /*Shell Area*/
+        
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear")) clear();
         if(!strcmp(line, "author")){printf(
@@ -30,8 +32,10 @@ void shell(){
 
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
         /*Reinit Area*/
+        memcpy(&lineCopy[0], &line[0],128);
         clearLineCache(line,128);
     }
+    printf("\n%s\n",lineCopy);
 }
 
 void program(void){
