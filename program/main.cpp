@@ -6,6 +6,22 @@ char line[128];
 void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
 } 
+
+
+void program(void){
+    char name[32]; 
+    char hobbies[128]; 
+    clearLineCache(name,32);
+    clearLineCache(hobbies,128);
+    printf(" \n");
+    printf("Enter your name: "); readLine(&name[0]);printf(" \n");
+    printf("Hello, %s!\n", name);
+    Sleep(1000);
+    printf("Tell your hobbies: "); readLine(&hobbies[0]);printf(" \n");
+    printf("%s\n", hobbies);
+    printf("Your hobbies really interesting things, bye!!\n \n");
+}
+
   
 void shell(){
     /*Shell Init Area*/
@@ -27,6 +43,7 @@ void shell(){
         if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
         if(!strcmp(line, "crashos")) crash();
+        if(!strcmp(line, "shittyprogram")) program();
         /*End of Shell Area*/
 
 
@@ -34,19 +51,6 @@ void shell(){
         /*Reinit Area*/
         clearLineCache(line,128);
     }
-}
-
-void program(void){
-    char name[32]; 
-    char hobbies[128]; 
-    clearLineCache(name,32);
-    clearLineCache(hobbies,128);
-    printf("Enter your name: "); readLine(&name[0]);printf("\n");
-    printf("Hello, %s!\n", name);
-    Sleep(1000);
-    printf("Tell your hobbies: "); readLine(&hobbies[0]);printf("\n");
-    printf("%s\n", hobbies);
-    printf("Your hobbies really interesting things, bye!!\n");
 }
 
 extern "C" int _start(){
