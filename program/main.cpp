@@ -13,8 +13,6 @@ void shell(){
     printf("Welcome to hyeoShell!\n");
     printf("\n%d\n", (int)&helloWorld);
     clearLineCache(line,128);
-
-    memcpy((void*)0xB8000,(void*)helloWorld,25);
     while(true){
         /*Shell Area*/
         

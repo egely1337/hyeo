@@ -70,7 +70,7 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         void* dest = (void*)mem[0]; 
         uint8_t val = mem[5];
         uint32_t size = *(uint32_t*)((uint8_t*)mem[6]); 
-        //memset(dest,val,size);
+        memset(dest,val,size);
         break;
     }
     default:

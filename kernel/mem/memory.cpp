@@ -20,13 +20,13 @@ void* memcut(void* dest, void* src, uint32_t size){
     while(index != size){
         *(_dest + index) = *(_src + index);
         *(_src + index) = 0;
-        index++;    
+        index++;     
     }   
     return _dest;
 }
 
 void* memset(void* dest,uint8_t val, uint32_t size){
-    for(volatile uint32_t i = 0; i < size; i++) *(uint8_t*)(dest + i) = val;
+    for(volatile uint32_t i = 0;i < size; i++) *(uint8_t*)(dest + i) = val;
     return dest;
 }
 
