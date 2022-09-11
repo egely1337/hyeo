@@ -25,8 +25,6 @@ void program(void){
   
 void shell(){
     /*Shell Init Area*/
-
-    printf("Welcome to hyeoShell!\n");
     clearLineCache(line,128);
     while(true){
         /*Shell Area*/
@@ -43,7 +41,7 @@ void shell(){
         if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
         if(!strcmp(line, "crashos")) crash();
-        if(!strcmp(line, "shittyprogram")) program();
+        if(!strcmp(line, "./shittyprogram")) program();
         /*End of Shell Area*/
 
 
