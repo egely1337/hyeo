@@ -61,9 +61,8 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         uint32_t* mem = (uint32_t*)0x0;
         uint32_t* dest = (uint32_t*)mem[0]; 
         uint32_t* src = (uint32_t*)mem[1];
-        uint32_t size = *(uint32_t*)mem[2]; 
-        _printf("\nMEMCPY\ndest: %d\nval: %d\nsize: %d\n", (int)dest, (int)src,size);
-        //memcpy(dest,src,size);
+        uint32_t size = mem[2]; 
+        memcpy(dest,src,size);
         break;
     }
     case SYS_KERNEL_MEMSET:{

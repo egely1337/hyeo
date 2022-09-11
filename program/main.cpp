@@ -1,17 +1,20 @@
 #include "inc/stdio.h"
 #include "inc/string.h"
 #include "inc/hyeo.h"
+const char* helloWorld = "H1e1l1l1o1 1W1o1r1l1d1!1";
 char line[128];
-char lineCopy[128];
-
 void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
 }
 
 void shell(){
     /*Shell Init Area*/
+
     printf("Welcome to hyeoShell!\n");
+    printf("\n%d\n", (int)&helloWorld);
     clearLineCache(line,128);
+
+    memcpy((void*)0xB8000,(void*)helloWorld,25);
     while(true){
         /*Shell Area*/
         
@@ -32,10 +35,8 @@ void shell(){
 
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
         /*Reinit Area*/
-        memcpy(&lineCopy[0], &line[0],128);
         clearLineCache(line,128);
     }
-    printf("\n%s\n",lineCopy);
 }
 
 void program(void){

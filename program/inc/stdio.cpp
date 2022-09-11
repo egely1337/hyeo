@@ -127,9 +127,9 @@ void exit(int exit_code){
 }
 void* memcpy(void* dest, void* src, uint32_t size){
     set_args(SYS_KERNEL_MEMCPY,0,0,0);
-    uint32_t* mem = (uint32_t*)0x0;
-    mem[0] = (uint32_t)dest;
-    mem[1] = (uint32_t)src;
+    int* mem = (int*)0x0;
+    mem[0] = (int)dest;
+    mem[1] = (int)src;
     mem[2] = size;
     asm("int $110");
 }

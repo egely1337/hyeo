@@ -2,6 +2,7 @@
 
 
 void* memcpy(void* dest, void* src, uint32_t size){
+    _printf("\nDEBUG\ndest: %d\nsrc: %d\nsize: %d", (int)dest, (int)src, (uint32_t)size);
     uint8_t* _dest = (uint8_t*)dest;
     uint8_t* _src = (uint8_t*)src;
     volatile uint32_t index = 0;

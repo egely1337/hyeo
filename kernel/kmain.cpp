@@ -39,8 +39,8 @@ extern "C" int _kmain(){
     Sleep(250);
     printOK("Keyboard IRQ has been init.\n");
     _printf("Welcome to hyeoOS!\n\n\n");
-    run_binary(shell,3209);
-    clear_binary(3209);
+    run_binary(shell,7432);
+    clear_binary(7432);
 
     printf("\nRebooting.");
     Sleep(250);

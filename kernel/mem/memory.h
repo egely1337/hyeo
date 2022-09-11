@@ -1,5 +1,6 @@
 #pragma once
 #include "../inc/typedefs.h"
+#include "../inc/tty.h"
 
 void* memcpy(void* dest, void* src, uint32_t size);
 void* memset(void* dest,uint8_t val, uint32_t size);
