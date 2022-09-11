@@ -5,8 +5,7 @@ const char* helloWorld = "H1e1l1l1o1 1W1o1r1l1d1!1";
 char line[128];
 void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
-}
-
+} 
   
 void shell(){
     /*Shell Init Area*/
