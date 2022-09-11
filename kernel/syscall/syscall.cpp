@@ -18,52 +18,58 @@ void call_handler(void){
 
 void syscall_handler(char type, char argv1, char argv2, char argv3){
     char* mem = 0x0;
+    sti(); // enable interrupts
     switch (type)
     {
     case SYS_CLEAR_SCREEN:
-        sti();
         clear_screen();
         break;
     case SYS_PRINT_CHAR:
-        sti();
         print_char(argv1,VGA_WHITEGRAY);
         break;
     case SYS_NEW_LINE:
-        sti();
         printf("\n");
         break;
     case SYS_PRINT_INTEGER:
         _ttyPrintInteger(*((int*)mem));
-        sti();
         break;
     case SYS_PROCESS_EXIT:
-        sti();
         _printf("\n\nProcess Exited with %d", *(int*)0x0);
         break;
     case SYS_RANDOM:
         break;
 
     case SYS_READCHAR: {
-        sti();
         char* b = (char*)0x0;
         *b = readChar();
         break;
     }
     case SYS_DELETEONECHARACTER: {
-        sti();
         deleteOneCharacter();
         break;
     }
     case SYS_SLEEP:{
-        sti();
         Sleep(*(int*)0x0);
         break;
     }
     case SYS_BOOT_SECONDS:{
-        sti();
         uint32_t* b = (uint32_t*)0x10;
         *b = getSeconds();
         break;
+    }
+    case SYS_KERNEL_MEMCPY:{
+        uint32_t* mem = (uint32_t*)0x0;
+        void* dest = (void*)mem[0]; 
+        void* src = (void*)mem[1];
+        uint32_t size = *(uint32_t*)mem[2]; 
+        memcpy(dest,src,size);
+    }
+    case SYS_KERNEL_MEMSET:{
+        uint32_t* mem = (uint32_t*)0x0;
+        void* dest = (void*)mem[0]; 
+        uint8_t val = mem[5];
+        uint32_t size = *(uint32_t*)((uint8_t*)mem[6]); 
+        memset(dest,val,size);
     }
     default:
         break;

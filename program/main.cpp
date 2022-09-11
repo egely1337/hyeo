@@ -16,10 +16,10 @@ void shell(){
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear")) clear();
         if(!strcmp(line, "author")){printf(
-            "\n \nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
+            "Author: %s\n", "[https://github.com/hyper1923/hyeo]"
         );}
         if(!strcmp(line, "help")){
-            printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\nbtime: %s\nsleep: %s"
+            printf(" \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\nbtime: %s\nsleep: %s\n \n"
             , "will show this", "will show the author", "will clear the screen", "will reboot the screen"
             , "will show boot time", "will sleep your OS for one second");
         }
@@ -28,10 +28,9 @@ void shell(){
         /*End of Shell Area*/
 
 
-        if(!strcmp(line, "btime")){printf("\nSystem booted up for %d seconds", get_boot_seconds());}
+        if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
         /*Reinit Area*/
         clearLineCache(line,128);
-        printf("\n");
     }
 }
 

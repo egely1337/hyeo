@@ -54,6 +54,7 @@ void readLine(char *data){
             print_char(b);
         }
     }
+    printf("\n");
     *data = '\0';
 }
 void clear(void){
