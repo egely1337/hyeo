@@ -1,10 +1,7 @@
 #include "timer.h"
+uint32_t _timerTicks;
 
-
-
-uint32_t _timerTicks = 0;
 void timer_handler(Registers _regs){
-    (void)_regs;
     _timerTicks++;
 }
 uint32_t getTicks(void){
@@ -22,6 +19,7 @@ void Sleep(uint32_t mill){
 }
 
 void init_timer(void){
+    _timerTicks = 0;
     register_interrupt_handler(IRQ0,timer_handler);
     uint16_t divisior = INPUT_CLOCK_FREQUENCY / 100;
     uint8_t low  = (uint8_t)(divisior & 0xFF);
