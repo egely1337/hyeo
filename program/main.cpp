@@ -19,8 +19,9 @@ void shell(){
             "\n \nAuthor: %s", "[https://github.com/hyper1923/hyeo]"
         );}
         if(!strcmp(line, "help")){
-            printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\n "
-            , "will show this", "will show the author", "will clear the screen", "will reboot the screen");
+            printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\nbtime: %s\nsleep: %s"
+            , "will show this", "will show the author", "will clear the screen", "will reboot the screen"
+            , "will show boot time", "will sleep your OS for one second");
         }
         if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
