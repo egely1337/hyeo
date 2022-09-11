@@ -7,7 +7,6 @@ void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
 }
  
-
 void shell(){
     /*Shell Init Area*/
 
