@@ -53,6 +53,6 @@ extern "C" int _kmain(){
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     
-    //Reboot();
+    Reboot();
     return -1;
 }
