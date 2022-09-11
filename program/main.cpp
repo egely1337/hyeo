@@ -7,6 +7,7 @@ void clearLineCache(char* data, uint32_t size){
     for(uint32_t i = 0; i < size; i++) data[i] = 1;
 }
 
+
 void shell(){
     /*Shell Init Area*/
 
@@ -14,7 +15,6 @@ void shell(){
     clearLineCache(line,128);
     while(true){
         /*Shell Area*/
-        
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear")) clear();
         if(!strcmp(line, "author")){printf(
