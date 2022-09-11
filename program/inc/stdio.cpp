@@ -3,7 +3,7 @@
 
 char* mem = 0x0;
 void deleteOneCharacter(void){
-    set_args(7,0,0,0);
+    set_args(SYS_DELETEONECHARACTER,0,0,0);
     asm("int $110");
 }
 char* _ttyPrintInteger(int _integer){
@@ -33,7 +33,7 @@ void set_args(char type, char arg1,char arg2, char arg3){
     mem[84] = arg3;
 }
 void print_char(char b){
-    set_args(1,b,0,0);
+    set_args(SYS_PRINT_CHAR,b,0,0);
     asm("int $110");
 }
 void readLine(char *data){
@@ -58,22 +58,20 @@ void readLine(char *data){
     *data = '\0';
 }
 void clear(void){
-    set_args(0,0,0,0);
+    set_args(SYS_CLEAR_SCREEN,0,0,0);
     asm("int $110");
 }
 char readChar(void){
-    set_args(6,0,0,0);
+    set_args(SYS_READCHAR,0,0,0);
     asm("int $110");
     return *(char*)0x0;
 }
-
 void Sleep(uint32_t mill){
-    set_args(8,0,0,0);
+    set_args(SYS_SLEEP,0,0,0);
     int* b = (int*)0x0;
     *b = mill;
     asm("int $110");
 }
-
 void printf(const char* fmt, ...){
     int* argp = (int*)&fmt;
     argp += sizeof(fmt) / sizeof(int);
@@ -83,7 +81,7 @@ void printf(const char* fmt, ...){
          switch (*data)
          {
             case '\n':
-                set_args(2,0,0,0);
+                set_args(SYS_NEW_LINE,0,0,0);
                 asm("int $110");
                 data++;
                 break;
@@ -121,8 +119,11 @@ void printf(const char* fmt, ...){
     }
 }
 void exit(int exit_code){
-    set_args(4,0,0,0);
-    *(int*)0x0 = exit_code;
+void* memcpy(void* dest, void* src, uint32_t size){
+    set_args(SYS_KERNEL_MEMCPY,0,0,0);
+    uint32_t* mem = (uint32_t*)0x0;
+    mem[0] = (uint32_t)dest;
+    mem[1] = (uint32_t)src;
+    mem[2] = size;
     asm("int $110");
-    return;
 }

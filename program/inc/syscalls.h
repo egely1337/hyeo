@@ -1,0 +1,13 @@
+#pragma once
+#define SYS_CLEAR_SCREEN 0
+#define SYS_PRINT_CHAR 1
+#define SYS_NEW_LINE 2
+#define SYS_PRINT_INTEGER 3
+#define SYS_PROCESS_EXIT 4
+#define SYS_RANDOM 5
+#define SYS_READCHAR 6
+#define SYS_DELETEONECHARACTER 7
+#define SYS_SLEEP 8
+#define SYS_BOOT_SECONDS 9
+#define SYS_KERNEL_MEMCPY 10
+#define SYS_KERNEL_MEMSET 11

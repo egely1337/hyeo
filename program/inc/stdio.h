@@ -1,6 +1,7 @@
 #pragma once
 #include "typedefs.h"
 #include "string.h"
+#include "syscalls.h"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 2
@@ -20,3 +21,5 @@ void readLine(char* data);
 void exit(int exit_code);
 void deleteOneCharacter(void);
 void Sleep(uint32_t mill);
+void* memcpy(void* dest, void* src, uint32_t size);
+void* memset(void* dest,uint8_t val, uint32_t size);
