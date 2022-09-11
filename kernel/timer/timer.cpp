@@ -10,7 +10,7 @@ uint32_t getTicks(void){
 
 uint32_t getSeconds(void){
     if(_timerTicks < 100) return 0;
-    return (uint32_t)_timerTicks;
+    return (uint32_t)_timerTicks / 100;
 }
 
 void Sleep(uint32_t mill){

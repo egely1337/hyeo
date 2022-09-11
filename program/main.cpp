@@ -27,7 +27,7 @@ void shell(){
         /*End of Shell Area*/
 
 
-        if(!strcmp(line, "test")){printf("\n%d", get_boot_seconds());}
+        if(!strcmp(line, "btime")){printf("\nSystem booted up for %d seconds", get_boot_seconds());}
         /*Reinit Area*/
         clearLineCache(line,128);
         printf("\n");
