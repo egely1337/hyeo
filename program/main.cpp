@@ -3,16 +3,15 @@
 #include "inc/hyeo.h"
 char line[128];
 
-void clearLineCache(void){
-    for(uint32_t i = 0; i < 128; i++) line[i] = 1;
+void clearLineCache(char* data, uint32_t size){
+    for(uint32_t i = 0; i < size; i++) data[i] = 1;
 }
 
-extern "C" int _start(){
+void shell(){
     /*Shell Init Area*/
     printf("Welcome to hyeoShell!\n");
-    clearLineCache();
+    clearLineCache(line,128);
     while(true){
-
         /*Shell Area*/
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear")) clear();
@@ -23,19 +22,32 @@ extern "C" int _start(){
             printf("\n \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\n "
             , "will show this", "will show the author", "will clear the screen", "will reboot the screen");
         }
-        /*
-        if(!strcmp(line, "sleep")) Sleep(100);
-        TODO: Fix the bug.
-        */
+        if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
-
         /*End of Shell Area*/
 
 
-
+        if(!strcmp(line, "test")){printf("\n%d", get_boot_seconds());}
         /*Reinit Area*/
-        clearLineCache();
+        clearLineCache(line,128);
         printf("\n");
     }
-    exit(EXIT_FAILURE);
+}
+
+void program(void){
+    char name[32]; 
+    char hobbies[128]; 
+    clearLineCache(name,32);
+    clearLineCache(hobbies,128);
+    printf("Enter your name: "); readLine(&name[0]);printf("\n");
+    printf("Hello, %s!\n", name);
+    Sleep(1000);
+    printf("Tell your hobbies: "); readLine(&hobbies[0]);printf("\n");
+    printf("%s\n", hobbies);
+    printf("Your hobbies really interesting things, bye!!\n");
+}
+
+extern "C" int _start(){
+    shell();
+    exit(1);
 }   

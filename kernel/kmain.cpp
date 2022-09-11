@@ -9,36 +9,50 @@
 
 extern "C" char shell[];
 
+unsigned read_pit_count(void) {
+	unsigned count = 0;
+ 
+	// Disable interrupts
+	cli();
+ 
+	// al = channel in bits 6 and 7, remaining bits clear
+	outb(0x43,0b0000000);
+ 
+	count = inb(0x40);		// Low byte
+	count |= inb(0x40)<<8;		// High byte
+ 
+	return count;
+}
 
 extern "C" int _kmain(){
     clear_screen();
-    sti(); // enable interrupts
     _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
     printOK("Screen has been cleared.\n");
     isr_install();
     printOK("ISR's has been installed.\n");
-    printOK("Enabled interrupts.\n");
-    init_timer();
+    printOK("Enabled interrupts.\n");    
     init_keyboard();
     sys_call_init();
+    init_timer();
+    sti();
     printOK("Timer IRQ has been init.\n");
-    Sleep(20);
+    Sleep(250);
     printOK("Keyboard IRQ has been init.\n");
     _printf("Welcome to hyeoOS!\n\n\n");
-    run_block(shell,4264);
-    clear_block(4264);
-
+    _printf("\n%d", getSeconds()); 
+    run_binary(shell,3209);
+    clear_binary(3209);
 
     printf("\nRebooting.");
-    Sleep(25);
+    Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    Sleep(25);
+    Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    Sleep(25);
+    Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    Sleep(25);
+    Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     
-    Reboot();
+    //Reboot();
     return -1;
 }

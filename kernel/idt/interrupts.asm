@@ -24,7 +24,7 @@ isr_common_stub:
 	iret ;
 
 irq_common_stub:
-    pusha 
+    pusha
     mov ax, ds
     push eax
     mov ax, 0x10

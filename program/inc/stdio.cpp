@@ -8,7 +8,7 @@ void deleteOneCharacter(void){
 }
 char* _ttyPrintInteger(int _integer){
     int i;
-    char* txt; 
+    char* txt = (char*)0x1000; 
     i = 0;
     do{
         txt[i++] = _integer % 10 + '0';
@@ -37,17 +37,20 @@ void print_char(char b){
     asm("int $110");
 }
 void readLine(char *data){
+    int current = 0;
     char* copy = (char*)data;
     while(*data != '\0'){
         uint8_t b = readChar();
         if(b == 0x1C) break;
-        if(b == 0x0E){
+        if(b == 0x0E && current != 0){
             deleteOneCharacter();
+            current--;
             data--;
         } else{
             b = ascii[b];
             *data = b;
             data++;
+            current++;
             print_char(b);
         }
     }

@@ -1,6 +1,11 @@
 #pragma once
 #include "idt.h"
 #include "../inc/tty.h"
+#define MASTER_PIC_CMD_PORT 0x20
+#define MASTER_PIC_DATA_PORT 0x21
+#define SLAVE_PIC_CMD_PORT 0xA0
+#define SLAVE_PIC_DATA_PORT 0xA1
+#define END_OF_INTERRUPT 0x20
 #define cli() asm("cli")
 #define sti() asm("sti")
 

@@ -3,25 +3,22 @@
 
 
 uint32_t _timerTicks = 0;
-static void timer_handler(Registers _regs){
+void timer_handler(Registers _regs){
+    (void)_regs;
     _timerTicks++;
-    if(_timerTicks == 0xFFFFFFFF){
-        _timerTicks = 0;
-    }
 }
-
 uint32_t getTicks(void){
     return _timerTicks;
 }
 
 uint32_t getSeconds(void){
     if(_timerTicks < 100) return 0;
-    return (uint32_t)_timerTicks / 100;
+    return (uint32_t)_timerTicks;
 }
 
 void Sleep(uint32_t mill){
-    uint32_t loc = _timerTicks + mill;
-    while (_timerTicks < loc) Nop();
+    uint32_t loc = _timerTicks + (mill / 10);
+    while (_timerTicks < loc) {hlt();};
 }
 
 void init_timer(void){

@@ -2,4 +2,4 @@
 #include "stdio.h"
 #include "string.h"
 
-int get_boot_seconds(void);
+uint32_t get_boot_seconds(void);

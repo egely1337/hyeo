@@ -20,7 +20,7 @@ bc:
 	mv hyeo-i386.flp ./build/x86_64/
 	rm bootloader.bin	
 	rm kernel.bin
-	qemu-system-i386 build/x86_64/hyeo-i386.flp -m 512M
+	qemu-system-i386 build/x86_64/hyeo-i386.flp -m 512M -smp 2
 run:
 	qemu-system-i386 build/x86_64/hyeo-i386.flp -m 512M
 
