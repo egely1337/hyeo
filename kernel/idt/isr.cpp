@@ -104,6 +104,8 @@ char *exception_messages[] = {
 };
 
 extern "C" void isr_handler(Registers r) {
+    _printf("Register info:\neax: %x\tebx: %x\necx: %x\tedi: %x\n\n",
+    r.eax,r.ebx,r.ecx,r.edi);
     panic(exception_messages[r.int_no]);
 }
 

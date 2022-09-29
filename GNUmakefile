@@ -15,9 +15,10 @@ bc:
 	${CC} -ffreestanding -m32 -g -c ./kernel/inc/tty.cpp -o objects/tty.o
 	${CC} -ffreestanding -m32 -g -c ./kernel/idt/idt.cpp -o objects/idtc.o
 	${CC} -ffreestanding -m32 -g -c ./kernel/idt/isr.cpp -o objects/isrc.o
+	${CC} -ffreestanding -m32 -g -c ./kernel/hyeo-fs/hfs.cpp -o objects/hfs.o
 	${CC} -ffreestanding -m32 -g -c ./kernel/runtime/runtime.cpp -o objects/runtime.o
-	i386-elf-ld --oformat binary -Ttext 0x8000  objects/init.o objects/syscall.o objects/panic.o objects/runtime.o objects/mem.o objects/idtc.o objects/isr.o objects/keyboard.o objects/timer.o objects/io.o objects/tty.o  objects/isrc.o objects/kernel.o objects/vs.o  -o kernel.bin
-	cat bootloader.bin kernel.bin program.bin > hyeo-i386.flp
+	i386-elf-ld --oformat binary -Ttext 0x8000  objects/init.o objects/syscall.o objects/hfs.o objects/panic.o objects/runtime.o objects/mem.o objects/idtc.o objects/isr.o objects/keyboard.o objects/timer.o objects/io.o objects/tty.o  objects/isrc.o objects/kernel.o objects/vs.o  -o kernel.bin
+	cat bootloader.bin kernel.bin hyeoFS.vfs > hyeo-i386.flp
 	mv hyeo-i386.flp ./build/x86_64/
 	rm bootloader.bin	
 	rm kernel.bin

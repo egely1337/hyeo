@@ -6,23 +6,10 @@
 #include "utils/kernutils.hpp"
 #include "syscall/syscall.h"
 #include "runtime/runtime.h"
+#include "hyeo-fs/hfs.h"
 
-extern "C" char shell[];
 
-unsigned read_pit_count(void) {
-	unsigned count = 0;
- 
-	// Disable interrupts
-	cli();
- 
-	// al = channel in bits 6 and 7, remaining bits clear
-	outb(0x43,0b0000000);
- 
-	count = inb(0x40);		// Low byte
-	count |= inb(0x40)<<8;		// High byte
- 
-	return count;
-}
+extern char vfs[];
 
 extern "C" int _kmain(){
     clear_screen();
@@ -38,11 +25,10 @@ extern "C" int _kmain(){
     printOK("Timer IRQ has been init.\n");
     Sleep(250);
     printOK("Keyboard IRQ has been init.\n");
-    _printf("Welcome to hyeoOS!\n\n\n");
-    run_binary(shell,7432);
-    clear_binary(7432);
+    _printf("Welcome to hyeoOS!\n\n\n");   
+    run_binary(vfs,7364);
+    clear_binary(7364);    
 
-    printf("\nRebooting.");
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
@@ -51,7 +37,6 @@ extern "C" int _kmain(){
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    
     Reboot();
     return -1;
 }

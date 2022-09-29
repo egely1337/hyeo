@@ -158,6 +158,12 @@ void _printf(const char* fmt, ...){
                         argp++;
                         break;
                     }
+                    case 'x': {
+                        ignored = data+1;
+                        print_hex(*(uint32_t*)argp);
+                        argp++;
+                        break;
+                    }
                     default:
                         print_char('%',VGA_WHITEGRAY);
                         break;
@@ -246,4 +252,40 @@ void printInteger(int _data){
     }
 void _printCurrentEntries(void){
     _printf("%d", cursorPosition.returnRawPosition());
+}
+
+void print_hex(uint32_t hex_nmbr){
+    uint8_t hex_string[30];
+    uint8_t *ascii_numbers = (uint8_t*)"0123456789ABCDEF";
+    uint8_t nibble;
+    uint8_t i = 0, j, temp;
+    uint8_t pad = 0;
+
+    if(hex_nmbr == 0){
+        memset(hex_string,'0\0',2);
+        i = 1;
+    }
+
+    if(hex_nmbr < 0x10) pad = 1;
+
+    while(hex_nmbr > 0){
+        nibble = (uint8_t) hex_nmbr & 0x0F;
+        nibble = ascii_numbers[nibble];
+        hex_string[i] = nibble;
+        hex_nmbr >>= 4;
+        i++;
+    }
+
+    if(pad) hex_string[i++] = '0';
+    hex_string[i++] = 'x';
+    hex_string[i++] = '0';
+    hex_string[i] = '\0';
+    i--;
+
+    for(j = 0; j < i;j++,--i){
+        temp = hex_string[j];
+        hex_string[j] = hex_string[i];
+        hex_string[i] = temp;
+    }
+    printf((char*)hex_string);
 }

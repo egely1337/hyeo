@@ -1,3 +1,3 @@
-global shell
-shell:
+global vfs
+vfs:
     incbin "program.bin"
