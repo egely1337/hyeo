@@ -3,6 +3,7 @@
 #include "../inc/tty.h"
 #include "../mem/memory.h"
 #include "../keyboard/keyboard.h"
+#include "../hyeo-fs/hfs.h"
 
 #define SYS_CLEAR_SCREEN 0
 #define SYS_PRINT_CHAR 1
@@ -17,6 +18,7 @@
 #define SYS_KERNEL_MEMCPY 10
 #define SYS_KERNEL_MEMSET 11
 #define SYS_CRASH 12
+#define SYS_HFS_GET_DATA 13
 
 
 

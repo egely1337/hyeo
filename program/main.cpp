@@ -42,6 +42,7 @@ void shell(){
         if(!strcmp(line, "exit")) break;
         if(!strcmp(line, "crashos")) crash();
         if(!strcmp(line, "./shittyprogram")) program();
+        if(!strcmp(line,"hfs status")) printf("%d\n", get_hfs_data()->fileCount);
         /*End of Shell Area*/
 
 
