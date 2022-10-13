@@ -34,7 +34,7 @@ char* hfs_open(const char* fn){
 
 FILE_TABLE* hfs_get_file_data(const char* fn){
     hfs_is_file_exists(fn);
-    if(init != HFS_INITALIZE) panic("File system hasnt inited yet.");
+    if(init != HFS_INITALIZE) panic("File system isn't inited yet.");
     FILE_TABLE_PTR *file_table = (FILE_TABLE_PTR*)((uint32_t)hfs + 0x8);
     for(uint32_t i = 0; i < hfs->fileCount; i++){
         if(!strcmp(file_table[i]->FILE_NAME,(char*)fn)) return file_table[i];
@@ -42,11 +42,16 @@ FILE_TABLE* hfs_get_file_data(const char* fn){
 }
 
 uint8_t hfs_is_file_exists(const char* fn){
-    if(init != HFS_INITALIZE) panic("File system hasnt inited yet.");
+    if(init != HFS_INITALIZE) panic("File system isn't inited yet.");
     FILE_TABLE_PTR *file_table = (FILE_TABLE_PTR*)((uint32_t)hfs + 0x8);
     for(uint32_t i = 0; i < hfs->fileCount; i++){
         if(!strcmp(file_table[i]->FILE_NAME,(char*)fn)) return true;
     }
 
     panic("File couldnt found in hfs.\n");
+}
+
+HFS_INIT* get_hfs_data(void){
+    if(init != HFS_INITALIZE) panic("File system isn't inited yet.");
+    return hfs;
 }

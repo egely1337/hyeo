@@ -23,6 +23,7 @@ struct FILE_TABLE{
 };
 
 
+
 void hfs_initialize(void);
 char* hfs_open(const char* fn);
 FILE_TABLE* hfs_get_file_data(const char* fn);

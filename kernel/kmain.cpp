@@ -26,18 +26,17 @@ extern "C" int _kmain(){
     hfs_initialize();
     printOK("File system init.\n");
     _printf("\nWelcome to hyeoOS!\n\n\n");  
-    FILE_TABLE* fp = hfs_get_file_data("app32/program.bin");
-    run_binary(fp->data,fp->FILE_SIZE);
+    run_executable("app32/program.bin");
 
     
-    /*Sleep(250);
-    print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    Reboot();*/
+    Sleep(250);
+    print_char('.',VGA_WHITEGRAY);
+    Reboot();
     return -1;
 }
