@@ -9,8 +9,6 @@
 #include "hyeo-fs/hfs.h"
 
 
-extern char vfs[];
-
 extern "C" int _kmain(){
     clear_screen();
     _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
@@ -24,12 +22,15 @@ extern "C" int _kmain(){
     sti();
     printOK("Timer IRQ has been init.\n");
     Sleep(250);
-    printOK("Keyboard IRQ has been init.\n");
-    _printf("Welcome to hyeoOS!\n\n\n");   
-    run_binary(vfs,7364);
-    clear_binary(7364);    
+    printOK("Keyboard IRQ has been init.\n"); 
+    hfs_initialize();
+    printOK("File system init.\n");
+    _printf("\nWelcome to hyeoOS!\n\n\n");  
+    FILE_TABLE* fp = hfs_get_file_data("app32/program.bin");
+    run_binary(fp->data,fp->FILE_SIZE);
 
-    Sleep(250);
+    
+    /*Sleep(250);
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
@@ -37,6 +38,6 @@ extern "C" int _kmain(){
     print_char('.',VGA_WHITEGRAY);
     Sleep(250);
     print_char('.',VGA_WHITEGRAY);
-    Reboot();
+    Reboot();*/
     return -1;
 }

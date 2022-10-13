@@ -2,23 +2,51 @@
 #include "../panic/panic.h"
 #include "../mem/memory.h"
 
+uint8_t init;
+typedef FILE_TABLE FILE_TABLE_PTR[5];
 extern char vfs[];
-
-
-#define DEBUG
+HFS_INIT* hfs;
 
 void hfs_initialize(){
-    HFS_INIT* hfs = (HFS_INIT*)vfs;
+    hfs = (HFS_INIT*)vfs;
     if(strcmp((char*)hfs->HFS,"HFS")) panic("HFS error!");
 
-    #ifdef DEBUG
-        _printf("HYEO File System:\n\nChecksum: %s\nFile: %d\n", hfs->HFS,hfs->fileCount);
+    #ifdef DEBUG 1
 
+        FILE_TABLE *file_table = (FILE_TABLE*)((uint32_t)hfs + 0x8);
+        _printf("hyeoFS: /dev/vfs/\n");
+        for(uint32_t i = 0; i < hfs->fileCount; i++){
+            _printf("file name: %s | file size: %d\n", 
+            (uint8_t*)file_table[i].FILE_NAME, file_table[i].FILE_SIZE);
+        }
 
-    FILE_TABLE* file_table = (FILE_TABLE*) (vfs+8);
-
-    //_printf("File name: %s\n File size: %d", file_table->FILE_NAME, file_table->FILE_SIZE);
-    unsigned int* b = (uint32_t*)vfs + 40;
-    _printf("%d", *b);
     #endif    
+    init = HFS_INITALIZE;
+}
+
+char* hfs_open(const char* fn){
+    if(init != HFS_INITALIZE) panic("File system hasnt inited yet.");
+    FILE_TABLE_PTR *file_table = (FILE_TABLE_PTR*)((uint32_t)hfs + 0x8);
+    for(uint32_t i = 0; i < hfs->fileCount; i++){
+        if(!strcmp(file_table[i]->FILE_NAME,(char*)fn)) return file_table[i]->data;
+    }
+}
+
+FILE_TABLE* hfs_get_file_data(const char* fn){
+    hfs_is_file_exists(fn);
+    if(init != HFS_INITALIZE) panic("File system hasnt inited yet.");
+    FILE_TABLE_PTR *file_table = (FILE_TABLE_PTR*)((uint32_t)hfs + 0x8);
+    for(uint32_t i = 0; i < hfs->fileCount; i++){
+        if(!strcmp(file_table[i]->FILE_NAME,(char*)fn)) return file_table[i];
+    }
+}
+
+uint8_t hfs_is_file_exists(const char* fn){
+    if(init != HFS_INITALIZE) panic("File system hasnt inited yet.");
+    FILE_TABLE_PTR *file_table = (FILE_TABLE_PTR*)((uint32_t)hfs + 0x8);
+    for(uint32_t i = 0; i < hfs->fileCount; i++){
+        if(!strcmp(file_table[i]->FILE_NAME,(char*)fn)) return true;
+    }
+
+    panic("File couldnt found in hfs.\n");
 }

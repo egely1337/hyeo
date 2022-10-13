@@ -40,11 +40,15 @@ void add_file(unsigned int _argSize,...){
     for(unsigned int i = 0; i < _argSize; i++){
         char* FILE_NAME = va_arg(list,char*);
         size_t FILE_SIZE = get_file_size(FILE_NAME);
+        size_t calc = 24576/2 - FILE_SIZE;
+        char* fs = (char*)malloc(calc);
+        memset(fs,0,calc);
         char* data = get_file_data(FILE_NAME);
         printf("\nFILE NAME: %s\nFILE_SIZE: %d\n",FILE_NAME,FILE_SIZE);
-        fwrite(FILE_NAME,strlen(FILE_NAME), 1,fp);
+        fwrite(FILE_NAME,32, 1,fp);
         fwrite(&FILE_SIZE,4,1,fp);
         fwrite(data,FILE_SIZE,1,fp);
+        fwrite(fs,calc,1,fp);
     }
     va_end(list);
     fclose(fp);
@@ -55,6 +59,6 @@ int main(int argc, char** argv){
     if(argc == 2) add_file(1,argv[1]);
     if(argc == 3) add_file(2,argv[1],argv[2]);
     if(argc == 4) add_file(3,argv[1],argv[2],argv[3]);
-    if(argc == 5) add_file(4,argv[1],argv[2],argv[3],argv[4]);
+    if(argc == 5) add_file(4,argv[1],argv[2],argv[3],argv[4],argv[5]);
     
 }

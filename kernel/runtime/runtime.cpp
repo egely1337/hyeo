@@ -3,6 +3,7 @@
 
 
 void run_binary(void* program_block, uint32_t programSize){
+    if(programSize == 0) return;
     memcpy(PROG_ADDRESS,program_block,programSize);
     asm volatile("call *%0"
 							 :

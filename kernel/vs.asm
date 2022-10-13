@@ -1,3 +1,3 @@
 global vfs
 vfs:
-    incbin "program.bin"
+    incbin "hyeoFS.vfs"

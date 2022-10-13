@@ -10,9 +10,9 @@
   6. IRQ's
   7. Text-Mode Support
   8. Syscalls
+  9. Simple File System (HFS)
   
 # TODO
-  1. Full Support on Text-Mode
   2. ELF Support
   3. ACPI Support
   4. VGA Support
