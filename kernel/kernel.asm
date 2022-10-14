@@ -3,6 +3,7 @@
 
 _enterpm:
     call ClearScreen
+    ;call detect_memory
     call EnableA20
     cli
     lgdt [gdt_descriptor]
@@ -20,10 +21,9 @@ EnableA20:
 succ:
     db "Successfully booted OS.", 0
     
-
 %include "bootloader/print.asm"
 %include "kernel/gdt.asm"
-
+%include "kernel/mem.asm"
 
 
 [bits 32]

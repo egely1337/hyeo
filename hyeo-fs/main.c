@@ -33,7 +33,7 @@ char* get_file_data(const char *FP_NAME){
 void add_file(unsigned int _argSize,...){
     va_list list;
     va_start(list,_argSize);
-    FILE* fp = fopen("hyeoFS.vfs", "w");
+    FILE* fp = fopen("../hyeoFS.vfs", "w");
     fwrite("HFS",4,1,fp);
     unsigned int c = _argSize;
     fwrite(&c,4,1,fp);

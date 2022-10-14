@@ -176,6 +176,133 @@ void _printf(const char* fmt, ...){
         }
     }
 }
+
+
+void _printf__ok(const char* fmt, ...){
+    int* argp = (int*)&fmt;
+    argp += sizeof(fmt) / sizeof(int);
+    uint8_t* ignored;
+    uint8_t* data = (uint8_t*)fmt;
+    print_char('[',VGA_GREEN);
+    print_char('O',VGA_GREEN);
+    print_char('K',VGA_GREEN);
+    print_char(']',VGA_GREEN);
+    print_char(' ', VGA_WHITEGRAY);
+    while(*data != 0){
+         switch (*data)
+        {
+            case '\n':
+                _t();
+                data++;
+                break;
+            case '\t':
+                cursorPosition.x += 4;
+                SetCursorPosition(cursorPosition.returnRawPosition());
+                data++;
+                break;
+            case '%':
+                switch (*(data + 1))
+                {
+                    case 'd':
+                        ignored = data +1;
+                        printf(_ttyPrintInteger(*argp));
+                        argp++;
+                        break;
+                    case 's': {
+                        ignored = data+1;
+                        printf(*(char**)argp);
+                        argp++;
+                        break;
+                    }
+                    case 'c': {
+                        ignored = data+1;
+                        print_char(*(char*)argp,VGA_WHITEGRAY);
+                        argp++;
+                        break;
+                    }
+                    case 'x': {
+                        ignored = data+1;
+                        print_hex(*(uint32_t*)argp);
+                        argp++;
+                        break;
+                    }
+                    default:
+                        print_char('%',VGA_WHITEGRAY);
+                        break;
+                }
+            default:
+                if(ignored != data && ((*data != '%' && *(data + 1) != 'd')|| (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')))   
+                    print_char(*data,VGA_WHITEGRAY);
+                data++;  
+                break;
+        }
+    }
+}
+
+void _printf__warn(const char* fmt, ...){
+    int* argp = (int*)&fmt;
+    argp += sizeof(fmt) / sizeof(int);
+    uint8_t* ignored;
+    uint8_t* data = (uint8_t*)fmt;
+    print_char('[',VGA_YELLOW);
+    print_char('W',VGA_YELLOW);
+    print_char('A',VGA_YELLOW);
+    print_char('R',VGA_YELLOW);
+    print_char('N',VGA_YELLOW);
+    print_char(']',VGA_YELLOW);
+    print_char(' ', VGA_WHITEGRAY);
+    while(*data != 0){
+         switch (*data)
+        {
+            case '\n':
+                _t();
+                data++;
+                break;
+            case '\t':
+                cursorPosition.x += 4;
+                SetCursorPosition(cursorPosition.returnRawPosition());
+                data++;
+                break;
+            case '%':
+                switch (*(data + 1))
+                {
+                    case 'd':
+                        ignored = data +1;
+                        printf(_ttyPrintInteger(*argp));
+                        argp++;
+                        break;
+                    case 's': {
+                        ignored = data+1;
+                        printf(*(char**)argp);
+                        argp++;
+                        break;
+                    }
+                    case 'c': {
+                        ignored = data+1;
+                        print_char(*(char*)argp,VGA_WHITEGRAY);
+                        argp++;
+                        break;
+                    }
+                    case 'x': {
+                        ignored = data+1;
+                        print_hex(*(uint32_t*)argp);
+                        argp++;
+                        break;
+                    }
+                    default:
+                        print_char('%',VGA_WHITEGRAY);
+                        break;
+                }
+            default:
+                if(ignored != data && ((*data != '%' && *(data + 1) != 'd')|| (*data != '%' && *(data + 1) != 's') || (*data != '%' && *(data + 1) != 'c')))   
+                    print_char(*data,VGA_WHITEGRAY);
+                data++;  
+                break;
+        }
+    }
+}
+
+
 char* _ttyPrintInteger(int _integer){
     int i;
     char* txt; 

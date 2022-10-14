@@ -3,10 +3,9 @@
 #include "../mem/memory.h"
 
 uint8_t init;
-extern char vfs[];
 HFS_INIT* hfs;
 
-
+extern "C" char vfs[];
 
 void hfs_initialize(){
     hfs = (HFS_INIT*)vfs;

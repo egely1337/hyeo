@@ -18,3 +18,14 @@ HFS_INIT* get_hfs_data(void){
     asm("int $110");
     return (HFS_INIT*)(*(int*)0x0);
 }
+
+/* Temporary, will be deleted soon */
+
+FILE_TABLE* get_first_table(void){
+    return (FILE_TABLE*)((uint32_t)get_hfs_data() + 0x8);
+}
+
+
+
+
+/* End of Temporary */

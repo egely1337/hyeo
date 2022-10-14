@@ -27,6 +27,8 @@ void printInteger(int _data);
 char* _ttyPrintInteger(int _integer);
 void resetCursorPosition(void);
 void _printf(const char* fmt, ...); 
+void _printf__ok(const char* fmt, ...); 
+void _printf__warn(const char* fmt, ...); 
 void _printCurrentEntries(void);
 void clear_col(int col);
 void clear_screen_color(uint16_t backcolour, uint16_t forecolour);

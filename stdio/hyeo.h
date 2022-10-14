@@ -27,3 +27,4 @@ struct FILE_TABLE{
 uint32_t get_boot_seconds(void);
 void crash(void);
 HFS_INIT* get_hfs_data(void);
+FILE_TABLE* get_first_table(void);

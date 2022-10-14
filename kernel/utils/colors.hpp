@@ -8,6 +8,7 @@
 #define VGA_RED 4
 #define VGA_MAGENTA 5
 #define VGA_WHITEGRAY 7
+#define VGA_YELLOW 14
 
 
 
