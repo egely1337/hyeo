@@ -12,6 +12,7 @@ void shell(){
     /*Shell Init Area*/
     clearLineCache(line,128);
     while(true){
+        FILE_TABLE* fp = open("app32/program.bin");
         /*Shell Area*/
         printf("root-hyeo > "); readLine(&line[0]);
         if(!strcmp(line, "clear") || !strcmp(line,"cls")) clear();
@@ -33,8 +34,10 @@ void shell(){
             }
             printf(" \n \n");
         }
-        /*End of Shell Area*/
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
+        if(!strcmp(line,"test")){memset((void*)0x30000, 0,fp->FILE_SIZE);}
+        /*End of Shell Area*/
+        
         /*Reinit Area*/
         clearLineCache(line,128);
     }

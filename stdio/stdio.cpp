@@ -133,3 +133,12 @@ void* memcpy(void* dest, void* src, uint32_t size){
     mem[2] = size;
     asm("int $110");
 }
+
+void* memset(void* dest,uint8_t val, uint32_t size){
+    set_args(SYS_KERNEL_MEMSET,0,0,0);
+    uint32_t* mem = (uint32_t*)0x0;
+    mem[0] = (uint32_t)dest;
+    *(uint8_t*)(mem + 5) = val; 
+    *(uint32_t*)(mem + 6) = size; 
+    asm("int $110");
+}

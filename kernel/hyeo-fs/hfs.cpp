@@ -4,11 +4,9 @@
 
 uint8_t init;
 HFS_INIT* hfs;
-
-extern "C" char vfs[];
-
+extern "C" char fs_start[];
 void hfs_initialize(){
-    hfs = (HFS_INIT*)vfs;
+    hfs = (HFS_INIT*)fs_start;
     if(strcmp((char*)hfs->HFS,"HFS")) panic("HFS error!");
 
     #ifdef DEBUG 1

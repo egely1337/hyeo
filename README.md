@@ -5,11 +5,9 @@
 # Features
   1. Bootloader
   3. Global Descriptor Table
-  4. Simple Paging
   5. Interrupt Descriptor Table
-  6. IRQ's
   7. Text-Mode Support
-  8. Syscalls
+  8. System Calls
   9. Simple File System (HFS)
   
 # TODO

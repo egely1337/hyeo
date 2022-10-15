@@ -22,4 +22,4 @@ void exit(int exit_code);
 void deleteOneCharacter(void);
 void Sleep(uint32_t mill);
 void* memcpy(void* dest, void* src, uint32_t size);
-void* memset(void* dest,uint8_t val, uint32_t size); //TODO
+void* memset(void* dest,uint8_t val, uint32_t size);

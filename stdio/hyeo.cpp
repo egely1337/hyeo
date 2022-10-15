@@ -25,6 +25,15 @@ FILE_TABLE* get_first_table(void){
     return (FILE_TABLE*)((uint32_t)get_hfs_data() + 0x8);
 }
 
+FILE_TABLE* open(const char* fn){
+    FILE_TABLE* fp = get_first_table();
+    for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){
+        if(!strcmp(fp[i].FILE_NAME,(char*)fn)) return &fp[i];
+    }
+
+    return nullptr;
+}
+
 
 
 

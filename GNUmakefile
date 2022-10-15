@@ -9,7 +9,7 @@ bc:
 	@-nasm bootloader/bootloader.asm -f bin -o bootloader.bin
 	@-nasm kernel/kernel.asm -f elf32 -o objects/init.o
 	@-nasm kernel/idt/interrupts.asm -f elf32 -o objects/isr.o
-	@-nasm kernel/vs.asm -f elf32 -o objects/vs.o
+	@-nasm kernel/vfs.asm -f elf32 -o objects/vs.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/kmain.cpp -o objects/kernel.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/panic/panic.cpp -o objects/panic.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/syscall/syscall.cpp -o objects/syscall.o
