@@ -25,7 +25,7 @@ bc:
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/mem/memmap.cpp -o objects/memmap.o
 	@-i386-elf-ld -T ./linker.ld
 	grub-mkrescue -o hyeo-i386.iso ./iso_root
-	qemu-system-x86_64 hyeo-i386.iso -m 512M
+	qemu-system-x86_64 hyeo-i386.iso -m 130M
 run:
 	qemu-system-i386 build/x86_64/hyeo-i386.flp 
 

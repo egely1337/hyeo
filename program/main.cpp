@@ -35,7 +35,7 @@ void shell(){
             printf(" \n \n");
         }
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
-        if(!strcmp(line,"test")){memset((void*)0x30000, 0,fp->FILE_SIZE);}
+        if(!strcmp(line,"test")){FILE_TABLE* fp = open("sys/lorem_ipsum.txt"); printf("%s\n", fp->data);}
         /*End of Shell Area*/
         
         /*Reinit Area*/
@@ -44,6 +44,7 @@ void shell(){
 }
 
 extern "C" int _start(){
+    printf("\nWelcome to hyeoOS!\n\n\n");  
     shell();
     exit(1);
 }    

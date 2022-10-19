@@ -4,14 +4,14 @@
   
 # Features
   1. GRUB
-  3. Global Descriptor Table
-  5. Interrupt Descriptor Table
-  7. Text-Mode Support
-  8. System Calls
-  9. Simple File System (HFS)
+  2. Global Descriptor Table
+  3. Interrupt Descriptor Table
+  4. Text-Mode Support
+  5. System Calls
+  6. Simple File System (HFS)
   
 # TODO
-  2. ELF Support
-  3. ACPI Support
-  4. VGA Support
+  1. ELF Support
+  2. ACPI Support
+  3. VGA Support
   
