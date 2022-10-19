@@ -15,21 +15,19 @@ extern "C" void _kmain(){
     register int *mboot_addr asm ("ebx"); // gets multiboot info address
     multiboot_t* mboot_struct = (multiboot_t*)mboot_addr; // gets grub 2 multiboot info
     mod_t* hfs_mod = (mod_t*)mboot_struct->mods_addr; // gets initrd
-    clear_screen();
     _printf("hyeo v0.1f %s %s \n\n\n",__DATE__, __TIME__);
-    _printf__ok("Screen has been cleared.\n");
     gdt_install();
-    gdt_flush();    
+    gdt_flush();  
+    _printf__ok("GDT has installed.\n");  
     isr_install();
-    _printf__ok("ISR's has been installed.\n");
-    _printf__ok("Enabled interrupts.\n");
+    _printf__ok("IDT has been installed.\n");
     sti();
     init_keyboard();
     sys_call_init();
     init_timer();
-    _printf__ok("Timer IRQ has been init.\n");
+    _printf__ok("Timer driver has been init.\n");
     Sleep(250);
-    _printf__ok("Keyboard IRQ has been init.\n"); 
+    _printf__ok("Keyboard driver has been init.\n"); 
     if(mboot_struct->mods_count < 1) panic("Initrd not found in system.");
     hfs_initialize((void*)hfs_mod->mod_start);
     _printf__ok("File system init.\n");
@@ -41,7 +39,7 @@ extern "C" void _kmain(){
     run_executable("sys/program.bin");
 
     
-    _printf("Kernel couldnt find t ask to run. System rebooting!");
+    _printf("Kernel couldnt find task to run. System rebooting!");
     for(uint32_t i = 0; i < 3; i++){print_char('.',VGA_WHITEGRAY); Sleep(700);}
     Reboot();
 }
