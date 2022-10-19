@@ -3,7 +3,7 @@
   It supports only i386 architecture.
   
 # Features
-  1. Bootloader
+  1. GRUB
   3. Global Descriptor Table
   5. Interrupt Descriptor Table
   7. Text-Mode Support
