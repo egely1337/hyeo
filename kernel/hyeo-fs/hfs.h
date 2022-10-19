@@ -22,7 +22,7 @@ struct FILE_TABLE{
     char data[MAX_PROGRAM_SIZE];
 };
 
-void hfs_initialize(void);
+void hfs_initialize(void* mod_st);
 char* hfs_open(const char* fn);
 FILE_TABLE* hfs_get_file_data(const char* fn);
 uint8_t hfs_is_file_exists(const char* fn);

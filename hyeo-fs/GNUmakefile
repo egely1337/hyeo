@@ -2,4 +2,4 @@ make:
 	gcc main.c -o ./hfs-create
 
 build-fs:
-	./hfs-create app32/program.bin app32/hello_world.txt
+	./hfs-create sys/program.bin sys/hello_world.txt sys/lorem_ipsum.txt

@@ -34,7 +34,7 @@ void syscall_handler(char type, char argv1, char argv2, char argv3){
         _ttyPrintInteger(*((int*)mem));
         break;
     case SYS_PROCESS_EXIT:
-        _printf("\n\nProcess Exited with %d", *(int*)0x0);
+        _printf("\n\nProcess Exited with %d\n", *(int*)0x0);
         break;
     case SYS_RANDOM:
         break;
