@@ -33,4 +33,4 @@ run:
 commit:
 	git add ./
 	git commit -am "push from makefile"
-	git push origin main
+	git push origin main --force
