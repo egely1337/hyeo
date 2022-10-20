@@ -1,8 +1,8 @@
-# hyeo-i386
-  hyeo OS is an Operating System written in Assembly and C++
+# hyeo-i386 🚀
+  hyeoOS is an Operating System written in Assembly and C++
   It supports only i386 architecture.
   
-# Features
+# Features ⭐
   - [x] GRUB
   - [x] Global Descriptor Table
   - [x] Interrupt Descriptor Table
@@ -10,7 +10,7 @@
   - [x] System Calls
   - [x] Simple File System (HFS)
   
-# TODO
+# TODO 📕
   - [ ] ELF Support
   - [ ] ACPI Support
   - [ ] VGA Support
