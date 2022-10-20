@@ -21,6 +21,7 @@ INPUT(
     objects/tty.o
     objects/isrc.o 
     objects/kernel.o 
+    objects/cpuid.o
 )
 
 OUTPUT(

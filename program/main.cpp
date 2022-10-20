@@ -26,7 +26,7 @@ void shell(){
         }
         if(!strcmp(line, "sleep")) Sleep(1000);
         if(!strcmp(line, "exit")) break;
-        if(!strcmp(line, "crashos")) crash();
+        if(!strcmp(line, "panic")) crash();
         if(!strcmp(line,"hfs status")) {
             printf(" \nTotal files on HFS: %d\n \n", get_hfs_data()->fileCount);
             for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){

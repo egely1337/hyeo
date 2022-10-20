@@ -10,6 +10,7 @@ bc:
 	@-nasm kernel/idt/interrupts.asm -f elf32 -o objects/isr.o
 	@-nasm kernel/multiboot.asm -f elf32 -o objects/multiboot.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/kmain.cpp -o objects/kernel.o
+	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/cpuid/cpuid.cpp -o objects/cpuid.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/gdt/gdt.cpp -o objects/gdt.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/panic/panic.cpp -o objects/panic.o
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/syscall/syscall.cpp -o objects/syscall.o
@@ -25,7 +26,7 @@ bc:
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/mem/memmap.cpp -o objects/memmap.o
 	@-i386-elf-ld -T ./linker.ld
 	grub-mkrescue -o hyeo-i386.iso ./iso_root
-	qemu-system-x86_64 hyeo-i386.iso -m 130M
+	qemu-system-i386 hyeo-i386.iso -m 130M
 run:
 	qemu-system-i386 build/x86_64/hyeo-i386.flp 
 
