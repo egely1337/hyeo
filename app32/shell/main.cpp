@@ -1,6 +1,10 @@
-#include "../stdio/stdio.h"
-#include "../stdio/string.h"
-#include "../stdio/hyeo.h"
+#include "../../stdio/stdio.h"
+#include "../../stdio/string.h"
+#include "../../stdio/hyeo.h"
+
+
+#define PROGRAM_SPACE (void*)0x60000
+
 const char* helloWorld = "H1e1l1l1o1 1W1o1r1l1d1!1";
 char line[128];
 void clearLineCache(char* data, uint32_t size){
@@ -36,7 +40,17 @@ void shell(){
         }
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
         if(!strcmp(line,"test")){FILE_TABLE* fp = open("sys/lorem_ipsum.txt"); printf("%s\n", fp->data);}
+        if(!strcmp(line,"panik")){
+            memset((void*)0x1000, 0, 0x8000);
+        }
         /*End of Shell Area*/
+
+        for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){
+            if(!strcmp(get_first_table()[i].FILE_NAME,line)){
+                    memcpy(PROGRAM_SPACE,get_first_table()[i].data,get_first_table()[i].FILE_SIZE);
+                   asm volatile("call *%0" :: "r"(get_first_table()[i].data));
+            }
+        }
         
         /*Reinit Area*/
         clearLineCache(line,128);
@@ -44,7 +58,7 @@ void shell(){
 }
 
 extern "C" int _start(){
-    printf("\nWelcome to hyeoOS!\n\n\n");  
+    printf(" \nWelcome to hyeoOS!\n \n \n");  
     shell();
     exit(1);
 }    

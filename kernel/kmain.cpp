@@ -18,6 +18,7 @@ extern "C" void _kmain(){
     mod_t* hfs_mod = (mod_t*)mboot_struct->mods_addr; // gets initrd
     clear_screen();
     _printf("hyeo v0.1f %s %s : %s() \n\n\n",__DATE__, __TIME__,__FUNCTION__);
+
     gdt_install();
     gdt_flush();  
     _printf__ok("GDT has installed.\n");  
@@ -39,7 +40,7 @@ extern "C" void _kmain(){
     _printf__warn("CPU Vendor: %s\n", get_cpu_info().vendor);
     HFS_INIT* hfs = get_hfs_data();
     FILE_TABLE* fp = hfs_get_file_data("app32/program.bin");
-    run_executable("sys/program.bin");
+    run_executable("sys/shell.bin");
 
     
     _printf("Kernel couldnt find task to run. System rebooting!");
