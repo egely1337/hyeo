@@ -3,8 +3,12 @@
 #include "../../stdio/hyeo.h"
 
 extern "C" int _start(){
-    for(uint32_t i = 0; i < 300; i++){
-        printf("Hello World!\n");
-    }
+    char line[128];
+    memset(&line[0],1,128);
+    printf("Hi, what is your name?: ");readLine((char*)&line[0]);
+    printf(
+        " \n%s nice name, welcome hyeo. have fun!" \
+        , line
+    );
     exit(1);
 }    

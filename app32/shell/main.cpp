@@ -39,7 +39,7 @@ void shell(){
             printf(" \n \n");
         }
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
-        if(!strcmp(line,"test")){FILE_TABLE* fp = open("sys/lorem_ipsum.txt"); printf("%s\n", fp->data);}
+        if(!strcmp(line,"test")){FILE_TABLE* fp = open("sys/lorem-ipsum.txt"); printf("%s\n", fp->data);}
         if(!strcmp(line,"panik")){
             memset((void*)0x1000, 0, 0x8000);
         }
@@ -48,7 +48,7 @@ void shell(){
         for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){
             if(!strcmp(get_first_table()[i].FILE_NAME,line)){
                     memcpy(PROGRAM_SPACE,get_first_table()[i].data,get_first_table()[i].FILE_SIZE);
-                   asm volatile("call *%0" :: "r"(get_first_table()[i].data));
+                   asm volatile("call *%0" :: "r"(PROGRAM_SPACE));
             }
         }
         
