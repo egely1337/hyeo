@@ -5,6 +5,7 @@ CC = i386-elf-gcc
 bc:
 	@-make -C ./stdio
 	@-make -C ./app32/shell 
+	@-make -C ./app32/program2 
 	@-make -C ./app32/hello-world
 	@-make -C ./hyeo-fs build-fs 
 	@-nasm kernel/kernel.asm -f elf32 -o objects/init.o
@@ -27,7 +28,7 @@ bc:
 	@-${CC} -Ttext 0x8000 -ffreestanding -m32 -g -c ./kernel/mem/memmap.cpp -o objects/memmap.o
 	@-i386-elf-ld -T ./linker.ld
 	grub-mkrescue -o hyeo-i386.iso ./iso_root
-	qemu-system-i386 -vga std  hyeo-i386.iso -m 1032M
+	qemu-system-i386 -vga std  hyeo-i386.iso -m 3096M
 run:
 	qemu-system-i386 build/x86_64/hyeo-i386.flp 
 

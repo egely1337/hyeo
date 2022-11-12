@@ -56,9 +56,12 @@ void add_file(unsigned int _argSize,...){
 
 int main(int argc, char** argv){
     assert(argc > 1); /* argc must be higher than 1 */
+    printf("%d",argc);
     if(argc == 2) add_file(1,argv[1]);
     if(argc == 3) add_file(2,argv[1],argv[2]);
     if(argc == 4) add_file(3,argv[1],argv[2],argv[3]);
     if(argc == 5) add_file(4,argv[1],argv[2],argv[3],argv[4],argv[5]);
+    if(argc == 6) add_file(5,argv[1],argv[2],argv[3],argv[4],argv[5]);
+    //if(argc == 6) add_file(6,argv[1],argv[2],argv[3],argv[4],argv[5]);
     
 }
