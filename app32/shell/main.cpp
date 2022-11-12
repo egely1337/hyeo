@@ -24,7 +24,7 @@ void shell(){
             "Author: %s\n", "[https://github.com/hyper1923/hyeo]"
         );}
         if(!strcmp(line, "help")){
-            printf(" \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\nbtime: %s\nsleep: %s\nhfs status: %s\n \n"
+            printf(" \nCommands:\n \nhelp: %s\nauthor: %s\nclear: %s\nexit: %s\nbtime: %s\nsleep: %s\nls: %s\n \n"
             , "will show this", "will show the author", "will clear the screen", "will reboot the screen"
             , "will show boot time", "will sleep your OS for one second", "will show hyeo-fs status");
         }
