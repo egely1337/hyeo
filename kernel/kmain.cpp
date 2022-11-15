@@ -21,7 +21,7 @@ extern "C" void _kmain(){
 
     gdt_install();
     gdt_flush();  
-    _printf__ok("GDT has installed.\n");  
+    _printf__ok("GDT has been installed.\n");  
     isr_install();
     _printf__ok("IDT has been installed.\n");
     init_cpuid();
@@ -32,6 +32,7 @@ extern "C" void _kmain(){
     _printf__ok("Timer driver has been init.\n");
     Sleep(250);
     _printf__ok("Keyboard driver has been init.\n"); 
+    if((uint32_t)(mboot_struct->mem_upper / 1024) < 32) panic("Not enough memory to run RamFS."); 
     if(mboot_struct->mods_count < 1) panic("Initrd not found in system.");
     hfs_initialize((void*)hfs_mod->mod_start);
     _printf__ok("File system init.\n");
@@ -43,7 +44,6 @@ extern "C" void _kmain(){
     run_executable("sys/shell.bin");
 
     
-    _printf("Kernel couldnt find task to run. System rebooting!");
-    for(uint32_t i = 0; i < 3; i++){print_char('.',VGA_WHITEGRAY); Sleep(700);}
-    Reboot();
+    _printf("Kernel couldnt find task to run. System halted!");
+    hlt();
 }

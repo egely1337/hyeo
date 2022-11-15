@@ -39,16 +39,19 @@ void shell(){
             printf(" \n \n");
         }
         if(!strcmp(line, "btime")){printf("System booted up for %d seconds\n", get_boot_seconds());}
-        if(!strcmp(line,"test")){FILE_TABLE* fp = open("sys/lorem-ipsum.txt"); printf("%s\n", fp->data);}
         if(!strcmp(line,"panik")){
             memset((void*)0x1000, 0, 0x8000);
+        }
+        if(!strcmp(line,"test")){
+            FILE_TABLE* fp = open("sys/hello_world.txt");
+            printf("%s", fp->data);
         }
         /*End of Shell Area*/
 
         for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){
             if(!strcmp(get_first_table()[i].FILE_NAME,line)){
                 if(!strcmp(get_first_table()[i].FILE_NAME, "sys/shell.bin")){
-                    printf("ERROR: You can't run shell.bin in shell\n ");
+                    printf("ERROR: You can't run shell.bin in shell!\n");
                     break;
                 }
                 uint32_t size = strlen(get_first_table()[i].FILE_NAME);

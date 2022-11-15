@@ -15,7 +15,7 @@ void* memcpy(void* dest, void* src, uint32_t size){
 void* memcut(void* dest, void* src, uint32_t size){
     uint8_t* _dest = (uint8_t*)dest;
     uint8_t* _src = (uint8_t*)src;
-    uint32_t index = 0;
+    volatile uint32_t index = 0;
     while(index != size){
         *(_dest + index) = *(_src + index);
         *(_src + index) = 0;
