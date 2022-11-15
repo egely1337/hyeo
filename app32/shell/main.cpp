@@ -42,10 +42,6 @@ void shell(){
         if(!strcmp(line,"panik")){
             memset((void*)0x1000, 0, 0x8000);
         }
-        if(!strcmp(line,"test")){
-            FILE_TABLE* fp = open("sys/hello_world.txt");
-            printf("%s", fp->data);
-        }
         /*End of Shell Area*/
 
         for(uint32_t i = 0; i < get_hfs_data()->fileCount; i++){
@@ -56,6 +52,13 @@ void shell(){
                 }
                 uint32_t size = strlen(get_first_table()[i].FILE_NAME);
                 uint8_t* ptr = (uint8_t*)get_first_table()[i].FILE_NAME+size-3;
+
+                if(!strcmp("txt", (char*)ptr)){
+                    FILE_TABLE* fp = open(line);
+                    if(fp) printf("%s", fp->data);
+                    break;
+                }
+
                 if(!strcmp("bin", (char*)ptr)){
                     memcpy(PROGRAM_SPACE,get_first_table()[i].data,get_first_table()[i].FILE_SIZE);
                     asm volatile("call *%0" :: "r"(PROGRAM_SPACE));
